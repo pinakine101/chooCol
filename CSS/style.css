@@ -24,6 +24,9 @@ li {
 p {
     color: #ffffff;
     font-family: sans-serif;
+    border:none;
+    background:none;
+    outline:none;
 }
 span.active {
     border-left: 10px solid #78e4fa;;
@@ -326,7 +329,14 @@ input {
      position: absolute;
 }
 .textColor {
-    /* margin-left:80px; */
+    width: 100px;
+    display: flex;
+    padding-left:80px;
+    font-weight:lighter;
+    font-family: 'Ubundu', sans-serif;
+    font-size: 20px;
+    color: #fffbfb;
+    filter: drop-shadow( 2px 2px 2px rgba(0, 0, 0, .5));
     display: flex;
     width: 150px;
    
