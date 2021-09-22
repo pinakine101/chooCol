@@ -35,59 +35,80 @@ document.addEventListener('DOMContentLoaded', () => {
 		cou5 = 4, cou6 = 5, cou7 = 6, cou8 = 7;
 	 //счётчики перебора цветов в каждом блоке
 	// let spanActive = $('span.active');
-	let spanActive = document.querySelector('span.active')
+	let spanActive = document.querySelector('span.active');
 	let textColorBuffer; // содержит имя цвета
 	let textColor = document.createElement('textCol'); // показывает имя цвета
 	let forslice ;
+	let mainColor;
 
+
+let arrStyleColor =[
+		'.color1',
+		'.color2',
+		'.color3',
+		'.color4',
+		'.color5',
+		'.color6',
+		'.color7',
+		'.color8'
+	];
+	let arrayHueMain = [
+		353, 22, 48, 94,  159, 200, 242, 281
+	];
+
+let arrayHueSleep = [
+	259, 190, 210, 190,  180, 48, 70, 180
+];
+
+let arraySaturSleep = [
+	100, 100, 100, 100, 100, 100, 100, 100,
+];
 
 let arrayLight =[
-	97,	93,	72,	53,  	48,	28,	18,	13
+	95,	92,	79,	46,  	43,	22,	14,	9
 ];
 
-// let arrayLight =[
-// 	30,	20,	30,	20,  	10,	20,	30,	10
-// ];
-// let arrayLight =[
-// 	97,	93,	72,	53,  	72,	53,	18,	13
-// ];
-// let arrayLight = [
-// 	60,	53,	483,	72, 72,	28,	90, 48
-// ];
 
-// let arrayHue = [
-// 	353, 22, 48, 94,  159, 200, 242, 281
-// ];
-let arrayHueSleep = [
-	159, 190, 210, 190,  180, 48, 70, 180
-];
+
 let arrayHueGost = [
-	10, 30, 40, 50, 60, 70, 80, 90
+	50, 210, 140, 250, 160, 170, 180, 90
 ];
+let arraySaturGost = [
+	20,	50,	72,	53,  48, 28,	50,	60
+];
+
+let arrayLightGost =[
+	3,	5,	2,	18,  	13,	28,	18,	13
+];
+
 
 let arrayHueKitch = [
 	240, 159, 94, 315,  296, 161, 308, 271
 ];
 let arraySaturKitch = [
-	5, 5, 5, 50,  5, 5, 5, 5
-];
-let arraySaturSleep = [
-	50, 50, 50, 50, 50, 50, 50, 50,
-];
-let arraySaturGost = [
-	97,	93,	72,	53,  	48,	28,	18,	13
+	5, 5, 5, 100,  5, 5, 5, 5
 ];
 
-let arrStyleColor =[
-	'.color1',
-	'.color2',
-	'.color3',
-	'.color4',
-	'.color5',
-	'.color6',
-	'.color7',
-	'.color8'
-];
+
+// let  newArrayLight = arrayLight.map((item)=>{
+	
+// 	let delta;
+// 	if(result[2]<= 100 && result[2] > 97){delta = 100 - (result[2])}
+// 	else if(result[2] <= 13 && result[2] >= 0) {delta =0}
+
+// 	else if(result[2] <= item[0]  && result[2] >=  item[1])   {delta = item[0] -(result[2]/8)}
+// 	else if(result[2] <= item[1]  && result[2] >=  item[2])   {delta = item[1] -(result[2]/8)}
+// 	else if(result[2] <= item[2]  && result[2] >=  item[3])   {delta = item[2] -(result[2]/8)}
+// 	else if(result[2] <= item[3]  && result[2] >=  item[4])   {delta = item[3] -(result[2]/8)}
+// 	else if(result[2] <= item[4]  && result[2] >=  item[5])   {delta = item[4] -(result[2]/8)}
+// 	else if(result[2] <= item[5]  && result[2] >=  item[6])   {delta = item[5] -(result[2]/8)}
+// 	else if(result[2] <= item[6]  && result[2] >=  item[7])   {delta = item[6] -(result[2]/8)}
+// 	else if(result[2] <= item[7]  && result[2] >=  item[0])   {delta = item[7] -(result[2]/8)}
+
+	
+// return item;
+// });
+
 
 	//______Active Color_________//
 
@@ -136,7 +157,8 @@ let arrStyleColor =[
 			editButtns[0].addEventListener('click', actCalcCouPus); //добавляем пребор гаммы в "+" с *span.active*  
 			editButtns[1].addEventListener('click', actCalcCouMinus); //добавляем пребор гаммы в "-" с *span.active*  
 			window.removeEventListener('mousemove', sorTable); //удаляем возможность перетаскивания блоков
-			// forslice = document.querySelector('span.active');
+			
+			sliceColor()
 			
 			console.log(result[0], result[1], result[2]);
 		
@@ -182,15 +204,11 @@ let arrStyleColor =[
 
 	function calcCouPlus(){ // запускаем перебор гаммы в plus режима БЕЗ *span.active*
 		counterPlus(arrStyleColor);
-		// coloring(counterPlus);
-		// actColorCalc(color1, arrayHue, arraySaturSleep, arrayLight)
-		// counterPlus(arrStyleColor);
+		separateGamms ();
 	};
 	function calcCouMinus(){ // запускаем перебор гаммы в minus режима БЕЗ *span.active*
 		counterMinus(arrStyleColor);
-		// coloring(counterMinus);
-		
-		
+		separateGamms ();
 	};
     function actCalcCouPus(){ // запускаем перебор гаммы в *+* режима  *span.active*
 		// sliceColor( spanActive)
@@ -309,47 +327,47 @@ let arrStyleColor =[
 				if (target == item) {
 					hideTabContent();
 					showTabsContent(i);
-					// counterMinus(arrStyleColor)
-					
-				
 				};
 			});
 		}; 
 		
 	};
-// tabsBtn.forEach((item)=>{
-// 	item.addEventListener('click',coloring(counterPlus))
-// });
+
+	counterPlus(arrStyleColor);
+
+	if(tabsContent[0].getAttribute('id') == 'sleepRoom'){
+			actColorCalc( arrayHueSleep, arraySaturSleep, arrayLight) };	
 
 	$(tabsBtn).on('click', clickTabsBtn);
 
+	
+
+	function separateGamms (){
+
+		if(tabsBtn[0].classList.contains('active')){
+			actColorCalc( arrayHueMain, arraySaturSleep,  arrayLight)
+						}		
+			else if(tabsBtn[1].classList.contains('active')){
+			actColorCalc(arrayHueGost, arraySaturGost,  arrayLight)
+					}
+			else if(tabsBtn[2].classList.contains('active')){
+			actColorCalc(arrayHueKitch, arraySaturKitch,  arrayLight)
+			};
+	};	
+
 	function onClickTab(e){
 		e.addEventListener('click', ()=>{
-			// actColorCalc(color2, arrayHue, arraySaturSleep, arrayLight, counterPlus)
-			if(tabsBtn[0].classList.contains('active')){
-				actColorCalc( arrayHueSleep, arraySaturSleep, arrayLight)
-							
-							}		
-			  else if(tabsBtn[1].classList.contains('active')){
-				actColorCalc(arrayHueGost, arraySaturGost, arrayLight)
-						
-						}
-			   else if(tabsBtn[2].classList.contains('active')){
-				actColorCalc(arrayHueKitch, arraySaturKitch, arrayLight)
-				  
-				};
+			separateGamms ();
 		},{once:true});
 		return e
-	}
-		
-	// onClickTab(tabsBtn[0]);
-					onClickTab(tabsBtn[1]);
-					onClickTab(tabsBtn[2]);
-					onClickTab(tabsBtn[3]);
-					onClickTab(tabsBtn[4]);
-					onClickTab(tabsBtn[5]);
-					onClickTab(tabsBtn[6]);
-					onClickTab(tabsBtn[7]);	
+	};
+	onClickTab(tabsBtn[1]);
+	onClickTab(tabsBtn[2]);
+	onClickTab(tabsBtn[3]);
+	onClickTab(tabsBtn[4]);
+	onClickTab(tabsBtn[5]);
+	onClickTab(tabsBtn[6]);
+	onClickTab(tabsBtn[7]);	
 	
 
 	//______ColorPicker_________//
@@ -400,164 +418,124 @@ let arrStyleColor =[
 
 
 	function sliceColor(e){
-		// e = forslice;
-		$(e).each(function () {
+		let actCol = document.querySelector('span.active');
+		$(actCol).each(function () {
 			const color = $(this).css("backgroundColor"),
 				[r, g, b] = color.match(/\d+/g);
 			const colHsl = RGB2HSL(r, g, b);
 			result = /hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)/g.exec(colHsl).slice(1);
-			
+			console.log(result);
 			return result;
 		});
 		// return e;
 	};
-	// actColorCalc(color1, arrayHue, arraySaturSleep, arrayLight, counterPlus);
-
 	
-
-
 	function actColorCalc(gammaHue, gammaSat, gammaLight ) {
-		
-	
 		
 					tabsContent.forEach((item, i)=>{
 
-						// let idTabsContent = item.getAttribute('id');
-
-						
-							// console.log(idTabsContent)
-						
-					let newArrayLight = gammaLight.map((item, i) =>{
-						sliceColor(color1)
-						// i++;
-						// if (i> gammaHue.length-1) {i = 0};
-						let delta;
-							 if(result[2]<= 100 && result[2] > 97){delta = 100 - (result[2])}
-						else if(result[2] <= 13 && result[2] >= 0) {delta =0}
-
-						else if(result[2] <= gammaLight[0]  && result[2] >=  gammaLight[1])   {delta = gammaLight[0] -(result[2]/1.23)}
-						else if(result[2] <= gammaLight[1]  && result[2] >=  gammaLight[2])   {delta = gammaLight[1] -(result[2]/1.23)}
-						else if(result[2] <= gammaLight[2]  && result[2] >=  gammaLight[3])   {delta = gammaLight[2] -(result[2]/1.23)}
-						else if(result[2] <= gammaLight[3]  && result[2] >=  gammaLight[4])   {delta = gammaLight[3] -(result[2]/1.23)}
-						else if(result[2] <= gammaLight[4]  && result[2] >=  gammaLight[5])   {delta = gammaLight[4] -(result[2]/1.23)}
-						else if(result[2] <= gammaLight[5]  && result[2] >=  gammaLight[6])   {delta = gammaLight[5] -(result[2]/1.23)}
-						else if(result[2] <= gammaLight[6]  && result[2] >=  gammaLight[7])   {delta = gammaLight[6] -(result[2]/1.23)}
-						else if(result[2] <= gammaLight[7]  && result[2] >=  gammaLight[0])   {delta = gammaLight[7] -(result[2]/1.23)}
-
-						return item - delta;
-					});
-
-					// let newArrayHue = gammaHue.map(item =>{
-					// 	let deltaHue = (180- result[0])/1.23;
-					// 	return  +item + deltaHue ;
-					// });
-
-				
-					// counterPlus(newArrayHue);
-					// counterPlus(newArrayLight);
 					if(tabsBtn[i].classList.contains('active')){
 				
-				
 						   if( gammaHue[i] >= 0  && gammaHue[i] <=22)  
-					{$(item).children(arrStyleColor[0]).css("background", `hsl(${ gammaHue[cou1]}, ${ + gammaSat[cou1]}%, ${+ newArrayLight [cou1] + 85  }%)`)
-					 $(item).children(arrStyleColor[1]).css("background", `hsl(${ gammaHue[cou2]}, ${ + gammaSat[cou2]}%, ${+ newArrayLight [cou2] + 82  }%)`)
-					 $(item).children(arrStyleColor[2]).css("background", `hsl(${ gammaHue[cou3]}, ${ + gammaSat[cou3]}%, ${+ newArrayLight [cou3] + 79  }%)`)
-					 $(item).children(arrStyleColor[3]).css("background", `hsl(${ gammaHue[cou4]}, ${ + gammaSat[cou4]}%, ${+ newArrayLight [cou4] + 46  }%)`)
-					 $(item).children(arrStyleColor[4]).css("background", `hsl(${ gammaHue[cou5]}, ${ + gammaSat[cou5]}%, ${+ newArrayLight [cou5] + 43  }%)`)
-					 $(item).children(arrStyleColor[5]).css("background", `hsl(${ gammaHue[cou6]}, ${ + gammaSat[cou6]}%, ${+ newArrayLight [cou6] + 22  }%)`)
-					 $(item).children(arrStyleColor[6]).css("background", `hsl(${ gammaHue[cou7]}, ${ + gammaSat[cou7]}%, ${+ newArrayLight [cou7] + 14  }%)`)
-					 $(item).children(arrStyleColor[7]).css("background", `hsl(${ gammaHue[cou8]}, ${ + gammaSat[cou8]}%, ${+ newArrayLight [cou8] + 9   }%)`)
+					{$(item).children(arrStyleColor[0]).css("background", `hsl(${ gammaHue[cou1]}, ${ + gammaSat[cou1]}%, ${ gammaLight [0]   }%)`)
+					 $(item).children(arrStyleColor[1]).css("background", `hsl(${ gammaHue[cou1]}, ${ + gammaSat[cou2]}%, ${ gammaLight [1]   }%)`)
+					 $(item).children(arrStyleColor[2]).css("background", `hsl(${ gammaHue[cou1]}, ${ + gammaSat[cou3]}%, ${ gammaLight [2]   }%)`)
+					 $(item).children(arrStyleColor[3]).css("background", `hsl(${ gammaHue[cou1]}, ${ + gammaSat[cou4]}%, ${ gammaLight [3]   }%)`)
+					 $(item).children(arrStyleColor[4]).css("background", `hsl(${ gammaHue[cou1]}, ${ + gammaSat[cou5]}%, ${ gammaLight [4]   }%)`)
+					 $(item).children(arrStyleColor[5]).css("background", `hsl(${ gammaHue[cou1]}, ${ + gammaSat[cou6]}%, ${ gammaLight [5]   }%)`)
+					 $(item).children(arrStyleColor[6]).css("background", `hsl(${ gammaHue[cou1]}, ${ + gammaSat[cou7]}%, ${ gammaLight [6]   }%)`)
+					 $(item).children(arrStyleColor[7]).css("background", `hsl(${ gammaHue[cou1]}, ${ + gammaSat[cou8]}%, ${ gammaLight [7]    }%)`)
 					}
 					else if( gammaHue[i] >= 23  && gammaHue[i] <= 48)  
-			       {$(item).children(arrStyleColor[0]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou1]     }%, ${ + newArrayLight [cou1] + 81 }%)`)
-					$(item).children(arrStyleColor[1]).css("background", `hsl(${gammaHue[cou2]}, ${ + gammaSat[cou2]     }%, ${ + newArrayLight [cou2] + 75 }%)`)
-					$(item).children(arrStyleColor[2]).css("background", `hsl(${gammaHue[cou3]}, ${ + gammaSat[cou3]     }%, ${ + newArrayLight [cou3] + 65 }%)`)
-					$(item).children(arrStyleColor[3]).css("background", `hsl(${gammaHue[cou4]}, ${ + gammaSat[cou4] +10 }%, ${ + newArrayLight [cou4] + 42 }%)`)
-					$(item).children(arrStyleColor[4]).css("background", `hsl(${gammaHue[cou5]}, ${ + gammaSat[cou5]     }%, ${ + newArrayLight [cou5] + 36 }%)`)
-					$(item).children(arrStyleColor[5]).css("background", `hsl(${gammaHue[cou6]}, ${ + gammaSat[cou6]     }%, ${ + newArrayLight [cou6] + 23 }%)`)
-					$(item).children(arrStyleColor[6]).css("background", `hsl(${gammaHue[cou7]}, ${ + gammaSat[cou7]     }%, ${ + newArrayLight [cou7] + 13 }%)`)
-					$(item).children(arrStyleColor[7]).css("background", `hsl(${gammaHue[cou8]}, ${ + gammaSat[cou8] +30 }%, ${ + newArrayLight [cou8] + 9   }%)`)
+			       {$(item).children(arrStyleColor[0]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou1]     }%, ${  gammaLight [0]  }%)`)
+					$(item).children(arrStyleColor[1]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou2]     }%, ${  gammaLight [1]  }%)`)
+					$(item).children(arrStyleColor[2]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou3]     }%, ${  gammaLight [2]  }%)`)
+					$(item).children(arrStyleColor[3]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou4] +10 }%, ${  gammaLight [3]  }%)`)
+					$(item).children(arrStyleColor[4]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou5]     }%, ${  gammaLight [4]  }%)`)
+					$(item).children(arrStyleColor[5]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou6]     }%, ${  gammaLight [5]  }%)`)
+					$(item).children(arrStyleColor[6]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou7]     }%, ${  gammaLight [6]  }%)`)
+					$(item).children(arrStyleColor[7]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou8] +30 }%, ${  gammaLight [7]   }%)`)
 					}
 					else if( gammaHue[i] >= 49  && gammaHue[i] <= 93) 
-				   {$(item).children(arrStyleColor[0]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou1]     }%, ${ + newArrayLight[cou1] + 78 }%)`)
-					$(item).children(arrStyleColor[1]).css("background", `hsl(${gammaHue[cou2]}, ${ + gammaSat[cou2]     }%, ${ + newArrayLight[cou2] + 68 }%)`)
-					$(item).children(arrStyleColor[2]).css("background", `hsl(${gammaHue[cou3]}, ${ + gammaSat[cou3]     }%, ${ + newArrayLight[cou3] + 53 }%)`)
-					$(item).children(arrStyleColor[3]).css("background", `hsl(${gammaHue[cou4]}, ${ + gammaSat[cou4] +35 }%, ${ + newArrayLight[cou4] + 31 }%)`)
-					$(item).children(arrStyleColor[4]).css("background", `hsl(${gammaHue[cou5]}, ${ + gammaSat[cou5] +5  }%, ${ + newArrayLight[cou5] + 28 }%)`)
-					$(item).children(arrStyleColor[5]).css("background", `hsl(${gammaHue[cou6]}, ${ + gammaSat[cou6] +30 }%, ${ + newArrayLight[cou6] + 15 }%)`)
-					$(item).children(arrStyleColor[6]).css("background", `hsl(${gammaHue[cou7]}, ${ + gammaSat[cou7] +5  }%, ${ + newArrayLight[cou7] + 11 }%)`)
-					$(item).children(arrStyleColor[7]).css("background", `hsl(${gammaHue[cou8]}, ${ + gammaSat[cou8] +10 }%, ${ + newArrayLight[cou8] + 7   }%)`)
+				   {$(item).children(arrStyleColor[0]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou1]     }%, ${  gammaLight [0] }%)`)
+					$(item).children(arrStyleColor[1]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou2]     }%, ${  gammaLight [1] }%)`)
+					$(item).children(arrStyleColor[2]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou3]     }%, ${  gammaLight [2] }%)`)
+					$(item).children(arrStyleColor[3]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou4] +35 }%, ${  gammaLight [3] }%)`)
+					$(item).children(arrStyleColor[4]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou5] +5  }%, ${  gammaLight [4] }%)`)
+					$(item).children(arrStyleColor[5]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou6] +30 }%, ${  gammaLight [5] }%)`)
+					$(item).children(arrStyleColor[6]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou7] +5  }%, ${  gammaLight [6] }%)`)
+					$(item).children(arrStyleColor[7]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou8] +10 }%, ${  gammaLight [7]  }%)`)
 					}
 					else if(gammaHue[i] >= 94 && gammaHue[i] <= 158) 
-				   {$(item).children(arrStyleColor[0]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou1]     }%, ${ + newArrayLight[cou1] + 81 }%)`)
-					$(item).children(arrStyleColor[1]).css("background", `hsl(${gammaHue[cou2]}, ${ + gammaSat[cou2]     }%, ${ + newArrayLight[cou2] + 74 }%)`)
-					$(item).children(arrStyleColor[2]).css("background", `hsl(${gammaHue[cou3]}, ${ + gammaSat[cou3]     }%, ${ + newArrayLight[cou3] + 55 }%)`)
-					$(item).children(arrStyleColor[3]).css("background", `hsl(${gammaHue[cou4]}, ${ + gammaSat[cou4] +20 }%, ${ + newArrayLight[cou4] + 32 }%)`)
-					$(item).children(arrStyleColor[4]).css("background", `hsl(${gammaHue[cou5]}, ${ + gammaSat[cou5]     }%, ${ + newArrayLight[cou5] + 29 }%)`)
-					$(item).children(arrStyleColor[5]).css("background", `hsl(${gammaHue[cou6]}, ${ + gammaSat[cou6]     }%, ${ + newArrayLight[cou6] + 18 }%)`)
-					$(item).children(arrStyleColor[6]).css("background", `hsl(${gammaHue[cou7]}, ${ + gammaSat[cou7]     }%, ${ + newArrayLight[cou7] + 13 }%)`)
-					$(item).children(arrStyleColor[7]).css("background", `hsl(${gammaHue[cou8]}, ${ + gammaSat[cou8]     }%, ${ + newArrayLight[cou8] + 9   }%)`)
+				   {$(item).children(arrStyleColor[0]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou1]     }%, ${  gammaLight [0] }%)`)
+					$(item).children(arrStyleColor[1]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou2]     }%, ${  gammaLight [1] }%)`)
+					$(item).children(arrStyleColor[2]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou3]     }%, ${  gammaLight [2] }%)`)
+					$(item).children(arrStyleColor[3]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou4] +20 }%, ${  gammaLight [3] }%)`)
+					$(item).children(arrStyleColor[4]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou5]     }%, ${  gammaLight [4] }%)`)
+					$(item).children(arrStyleColor[5]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou6]     }%, ${  gammaLight [5] }%)`)
+					$(item).children(arrStyleColor[6]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou7]     }%, ${  gammaLight [6] }%)`)
+					$(item).children(arrStyleColor[7]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou8]     }%, ${  gammaLight [7]  }%)`)
 				   } 
 					else if( gammaHue[i] >= 159 && gammaHue[i] <= 199) 
-				   {$(item).children(arrStyleColor[0]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou1]     }%, ${ + newArrayLight [cou1] + 83 }%)`)
-					$(item).children(arrStyleColor[1]).css("background", `hsl(${gammaHue[cou2]}, ${ + gammaSat[cou2]     }%, ${ + newArrayLight [cou2] + 77 }%)`)
-					$(item).children(arrStyleColor[2]).css("background", `hsl(${gammaHue[cou3]}, ${ + gammaSat[cou3]     }%, ${ + newArrayLight [cou3] + 60 }%)`)
-					$(item).children(arrStyleColor[3]).css("background", `hsl(${gammaHue[cou4]}, ${ + gammaSat[cou4] +10 }%, ${ + newArrayLight [cou4] + 33 }%)`)
-					$(item).children(arrStyleColor[4]).css("background", `hsl(${gammaHue[cou5]}, ${ + gammaSat[cou5] +10 }%, ${ + newArrayLight [cou5] + 27 }%)`)
-					$(item).children(arrStyleColor[5]).css("background", `hsl(${gammaHue[cou6]}, ${ + gammaSat[cou6] +10 }%, ${ + newArrayLight [cou6] + 17 }%)`)
-					$(item).children(arrStyleColor[6]).css("background", `hsl(${gammaHue[cou7]}, ${ + gammaSat[cou7] +20 }%, ${ + newArrayLight [cou7] + 11 }%)`)
-					$(item).children(arrStyleColor[7]).css("background", `hsl(${gammaHue[cou8]}, ${ + gammaSat[cou8] +20 }%, ${ + newArrayLight [cou8] + 8   }%)`)
+				   {$(item).children(arrStyleColor[0]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou1]     }%, ${  gammaLight [0] }%)`)
+					$(item).children(arrStyleColor[1]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou2]     }%, ${  gammaLight [1] }%)`)
+					$(item).children(arrStyleColor[2]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou3]     }%, ${  gammaLight [2] }%)`)
+					$(item).children(arrStyleColor[3]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou4] +10 }%, ${  gammaLight [3] }%)`)
+					$(item).children(arrStyleColor[4]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou5] +10 }%, ${  gammaLight [4] }%)`)
+					$(item).children(arrStyleColor[5]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou6] +10 }%, ${  gammaLight [5] }%)`)
+					$(item).children(arrStyleColor[6]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou7] +20 }%, ${  gammaLight [6] }%)`)
+					$(item).children(arrStyleColor[7]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou8] +20 }%, ${  gammaLight [7]  }%)`)
 				   }
 					else if( gammaHue[i] >= 200 && gammaHue[i] <= 241) 
-				   {$(item).children(arrStyleColor[0]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou1] +30 }%, ${ + newArrayLight [cou1] + 85 }%)`)
-					$(item).children(arrStyleColor[1]).css("background", `hsl(${gammaHue[cou2]}, ${ + gammaSat[cou2] +50 }%, ${ + newArrayLight [cou2] + 82 }%)`)
-					$(item).children(arrStyleColor[2]).css("background", `hsl(${gammaHue[cou3]}, ${ + gammaSat[cou3] +70 }%, ${ + newArrayLight [cou3] + 74 }%)`)
-					$(item).children(arrStyleColor[3]).css("background", `hsl(${gammaHue[cou4]}, ${ + gammaSat[cou4] +20 }%, ${ + newArrayLight [cou4] + 53 }%)`)
-					$(item).children(arrStyleColor[4]).css("background", `hsl(${gammaHue[cou5]}, ${ + gammaSat[cou5]     }%, ${ + newArrayLight [cou5] + 41 }%)`)
-					$(item).children(arrStyleColor[5]).css("background", `hsl(${gammaHue[cou6]}, ${ + gammaSat[cou6] +5  }%, ${ + newArrayLight [cou6] + 28 }%)`)
-					$(item).children(arrStyleColor[6]).css("background", `hsl(${gammaHue[cou7]}, ${ + gammaSat[cou7] +10 }%, ${ + newArrayLight [cou7] + 20 }%)`)
-					$(item).children(arrStyleColor[7]).css("background", `hsl(${gammaHue[cou8]}, ${ + gammaSat[cou8] +20 }%, ${ + newArrayLight [cou8] + 15  }%)`)
+				   {$(item).children(arrStyleColor[0]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou1] +30 }%, ${  gammaLight [0]  }%)`)
+					$(item).children(arrStyleColor[1]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou2] +50 }%, ${  gammaLight [1]  }%)`)
+					$(item).children(arrStyleColor[2]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou3] +70 }%, ${  gammaLight [2]  }%)`)
+					$(item).children(arrStyleColor[3]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou4] +20 }%, ${  gammaLight [3]  }%)`)
+					$(item).children(arrStyleColor[4]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou5]     }%, ${  gammaLight [4]  }%)`)
+					$(item).children(arrStyleColor[5]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou6] +5  }%, ${  gammaLight [5]  }%)`)
+					$(item).children(arrStyleColor[6]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou7] +10 }%, ${  gammaLight [6]  }%)`)
+					$(item).children(arrStyleColor[7]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou8] +20 }%, ${  gammaLight [7]   }%)`)
 				   }
 					else if( gammaHue[i] >= 242 && gammaHue[i] <= 280) 
-				   {$(item).children(arrStyleColor[0]).css("background", `hsl(${gammaHue[cou1]}, ${+ gammaSat[cou1] +20  }%, ${ + newArrayLight [cou1] + 84 }%)`)
-					$(item).children(arrStyleColor[1]).css("background", `hsl(${gammaHue[cou2]}, ${+ gammaSat[cou2] +20  }%, ${ + newArrayLight [cou2] + 79 }%)`)
-					$(item).children(arrStyleColor[2]).css("background", `hsl(${gammaHue[cou3]}, ${+ gammaSat[cou3] +30  }%, ${ + newArrayLight [cou3] + 75 }%)`)
-					$(item).children(arrStyleColor[3]).css("background", `hsl(${gammaHue[cou4]}, ${+ gammaSat[cou4] +30  }%, ${ + newArrayLight [cou4] + 68 }%)`)
-					$(item).children(arrStyleColor[4]).css("background", `hsl(${gammaHue[cou5]}, ${+ gammaSat[cou5] +30  }%, ${ + newArrayLight [cou5] + 65 }%)`)
-					$(item).children(arrStyleColor[5]).css("background", `hsl(${gammaHue[cou6]}, ${+ gammaSat[cou6] +30  }%, ${ + newArrayLight [cou6] + 55 }%)`)
-					$(item).children(arrStyleColor[6]).css("background", `hsl(${gammaHue[cou7]}, ${+ gammaSat[cou7] +30  }%, ${ + newArrayLight [cou7] + 48 }%)`)
-					$(item).children(arrStyleColor[7]).css("background", `hsl(${gammaHue[cou8]}, ${+ gammaSat[cou8] +30  }%, ${ + newArrayLight [cou8] + 40 }%)`)
+				   {$(item).children(arrStyleColor[0]).css("background", `hsl(${gammaHue[cou1]}, ${+ gammaSat[cou1] +20  }%, ${  gammaLight [0] }%)`)
+					$(item).children(arrStyleColor[1]).css("background", `hsl(${gammaHue[cou1]}, ${+ gammaSat[cou2] +20  }%, ${  gammaLight [1] }%)`)
+					$(item).children(arrStyleColor[2]).css("background", `hsl(${gammaHue[cou1]}, ${+ gammaSat[cou3] +30  }%, ${  gammaLight [2] }%)`)
+					$(item).children(arrStyleColor[3]).css("background", `hsl(${gammaHue[cou1]}, ${+ gammaSat[cou4] +30  }%, ${  gammaLight [3] }%)`)
+					$(item).children(arrStyleColor[4]).css("background", `hsl(${gammaHue[cou1]}, ${+ gammaSat[cou5] +30  }%, ${  gammaLight [4] }%)`)
+					$(item).children(arrStyleColor[5]).css("background", `hsl(${gammaHue[cou1]}, ${+ gammaSat[cou6] +30  }%, ${  gammaLight [5] }%)`)
+					$(item).children(arrStyleColor[6]).css("background", `hsl(${gammaHue[cou1]}, ${+ gammaSat[cou7] +30  }%, ${  gammaLight [6] }%)`)
+					$(item).children(arrStyleColor[7]).css("background", `hsl(${gammaHue[cou1]}, ${+ gammaSat[cou8] +30  }%, ${  gammaLight [7] }%)`)
 				   }
 					else if( gammaHue[i] >= 281 && gammaHue[i] <= 352) 
-				   {$(item).children(arrStyleColor[0]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou1]     }%, ${ + newArrayLight [cou1] + 85 }%)`)
-					$(item).children(arrStyleColor[1]).css("background", `hsl(${gammaHue[cou2]}, ${ + gammaSat[cou2]     }%, ${ + newArrayLight [cou2] + 83 }%)`)
-					$(item).children(arrStyleColor[2]).css("background", `hsl(${gammaHue[cou3]}, ${ + gammaSat[cou3] +10 }%, ${ + newArrayLight [cou3] + 77 }%)`)
-					$(item).children(arrStyleColor[3]).css("background", `hsl(${gammaHue[cou4]}, ${ + gammaSat[cou4] +10 }%, ${ + newArrayLight [cou4] + 64 }%)`)
-					$(item).children(arrStyleColor[4]).css("background", `hsl(${gammaHue[cou5]}, ${ + gammaSat[cou5]     }%, ${ + newArrayLight [cou5] + 55 }%)`)
-					$(item).children(arrStyleColor[5]).css("background", `hsl(${gammaHue[cou6]}, ${ + gammaSat[cou6]     }%, ${ + newArrayLight [cou6] + 33}%)`)
-					$(item).children(arrStyleColor[6]).css("background", `hsl(${gammaHue[cou7]}, ${ + gammaSat[cou7]     }%, ${ + newArrayLight [cou7] + 25 }%)`)
-					$(item).children(arrStyleColor[7]).css("background", `hsl(${gammaHue[cou8]}, ${ + gammaSat[cou8] -5  }%, ${ + newArrayLight [cou8] + 18 }%)`)
+				   {$(item).children(arrStyleColor[0]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou1]     }%, ${  gammaLight [0]  }%)`)
+					$(item).children(arrStyleColor[1]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou2]     }%, ${  gammaLight [1]  }%)`)
+					$(item).children(arrStyleColor[2]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou3] +10 }%, ${  gammaLight [2]  }%)`)
+					$(item).children(arrStyleColor[3]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou4] +10 }%, ${  gammaLight [3]  }%)`)
+					$(item).children(arrStyleColor[4]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou5]     }%, ${  gammaLight [4]  }%)`)
+					$(item).children(arrStyleColor[5]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou6]     }%, ${  gammaLight [5] }%)`)
+					$(item).children(arrStyleColor[6]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou7]     }%, ${  gammaLight [6]  }%)`)
+					$(item).children(arrStyleColor[7]).css("background", `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou8] -5  }%, ${  gammaLight [7]  }%)`)
 				   }
 					else if(gammaHue[i] >= 353  && gammaHue[i] <= 360)  
-					{$(item).children(arrStyleColor[0]).css("background", `hsl(${gammaHue[cou1]}, ${gammaSat[cou1]     }%, ${ + newArrayLight [cou1] + 85 }%)`)
-					 $(item).children(arrStyleColor[1]).css("background", `hsl(${gammaHue[cou2]}, ${gammaSat[cou2]     }%, ${ + newArrayLight [cou2] + 82 }%)`)
-					 $(item).children(arrStyleColor[2]).css("background", `hsl(${gammaHue[cou3]}, ${gammaSat[cou3]     }%, ${ + newArrayLight [cou3] + 75 }%)`)
-					 $(item).children(arrStyleColor[3]).css("background", `hsl(${gammaHue[cou4]}, ${gammaSat[cou4]     }%, ${ + newArrayLight [cou4] + 48 }%)`)
-					 $(item).children(arrStyleColor[4]).css("background", `hsl(${gammaHue[cou5]}, ${gammaSat[cou5]     }%, ${ + newArrayLight [cou5] + 35 }%)`)
-					 $(item).children(arrStyleColor[5]).css("background", `hsl(${gammaHue[cou6]}, ${gammaSat[cou6]     }%, ${ + newArrayLight [cou6] + 22 }%)`)
-					 $(item).children(arrStyleColor[6]).css("background", `hsl(${gammaHue[cou7]}, ${gammaSat[cou7]     }%, ${ + newArrayLight [cou7] + 14 }%)`)
-					 $(item).children(arrStyleColor[7]).css("background", `hsl(${gammaHue[cou8]}, ${gammaSat[cou8]     }%, ${ + newArrayLight [cou8] + 9   }%)`)
+					{$(item).children(arrStyleColor[0]).css("background", `hsl(${gammaHue[cou1]}, ${gammaSat[cou1]     }%, ${  gammaLight [0]  }%)`)
+					 $(item).children(arrStyleColor[1]).css("background", `hsl(${gammaHue[cou1]}, ${gammaSat[cou2]     }%, ${  gammaLight [1]  }%)`)
+					 $(item).children(arrStyleColor[2]).css("background", `hsl(${gammaHue[cou1]}, ${gammaSat[cou3]     }%, ${  gammaLight [2]  }%)`)
+					 $(item).children(arrStyleColor[3]).css("background", `hsl(${gammaHue[cou1]}, ${gammaSat[cou4]     }%, ${  gammaLight [3]  }%)`)
+					 $(item).children(arrStyleColor[4]).css("background", `hsl(${gammaHue[cou1]}, ${gammaSat[cou5]     }%, ${  gammaLight [4]  }%)`)
+					 $(item).children(arrStyleColor[5]).css("background", `hsl(${gammaHue[cou1]}, ${gammaSat[cou6]     }%, ${  gammaLight [5]  }%)`)
+					 $(item).children(arrStyleColor[6]).css("background", `hsl(${gammaHue[cou1]}, ${gammaSat[cou7]     }%, ${  gammaLight [6]  }%)`)
+					 $(item).children(arrStyleColor[7]).css("background", `hsl(${gammaHue[cou1]}, ${gammaSat[cou8]     }%, ${  gammaLight [7]   }%)`)
 					}
 
-					   if(newArrayLight[i] == 100){$(tabsContent).children(item).css("background", `hsl(${newArrayLight[i]}, ${50}%, ${ newArrayLight[i]-11}%)`)}
-					else if(newArrayLight[i] == 0){$(tabsContent).children(item).css("background", `hsl(${newArrayLight[i]}, ${50}%, ${ newArrayLight[i]+11}%)`)}
+					   if(gammaLight[i] == 100){$(tabsContent).children(item).css("background", `hsl(${gammaLight[i]}, ${50}%, ${ gammaLight [i]-11}%)`)}
+					else if(gammaLight[i] == 0){$(tabsContent).children(item).css("background", `hsl(${gammaLight[i]}, ${50}%, ${ gammaLight [i]+11}%)`)}
 			};
 		
 			// $('span.active').css('backgroundColor', `hsl(${result[0]}, ${result[1]}%, ${result[2]}%)`);
 			// callback(arrStyleColor);
 		});
 	
-		return gammaHue, gammaSat, gammaLight;
+		return gammaHue, gammaSat;
 			
 	};
 
@@ -573,13 +551,7 @@ let arrStyleColor =[
 
 // 	callback(arrStyleColor);
 // };	
-counterPlus(arrStyleColor)
-	// coloring(counterPlus);
-
-	if(tabsContent[0].getAttribute('id') == 'sleepRoom'){
-		actColorCalc( arrayHueSleep, arraySaturSleep, arrayLight)
-					
-					}		
+	
 	//   else if(tabsContent[1].getAttribute('id') == 'gostinaya'){
 	// 	actColorCalc( arrayHueGost, arraySaturGost, arrayLight)
 				
