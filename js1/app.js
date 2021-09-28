@@ -336,13 +336,13 @@ let arrayLightHoll =[ 95, 92, 97,	46, 79,	79,	28,	4 ];
 		}; 
 		
 	};
-
 	counterPlus(arrStyleColor);
+	counterPlus();
 
 	if(tabsContent[0].getAttribute('id') == 'sleepRoom'){
 			actColorCalc( arrayHueSleep, arraySaturSleep, arrayLightSleep) };	
 
-	$(tabsBtn).on('click', clickTabsBtn);
+	$(tabsBtn).on('click',  clickTabsBtn);
 
 	
 
