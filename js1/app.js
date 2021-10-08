@@ -366,6 +366,9 @@ let arrayLightHoll =[ 95, 92, 97,	46, 79,	79,	28,	4 ];
 			else if(tabsBtn[5].classList.contains('active')){
 				actColorCalc(arrayHueHoll, arraySaturHoll, arrayLightHoll)
 				}
+			else if(tabsBtn[6].classList.contains('active')){
+					actColorCalc(arrayHueHoll, arraySaturHoll, arrayLightCad)
+					}
 	};	
 
 	function onClickTab(e){
