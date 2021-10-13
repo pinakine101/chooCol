@@ -174,17 +174,19 @@ let arrayLightHoll =[ 95, 92, 97,	46, 79,	79,	28,	4 ];
 
 	textColor.addEventListener('click', (e)=>{
 		navigator.clipboard.writeText(textColorBuffer); //пишем в буфер обмена имя цвета
-				let copied = document.createElement('div'); //созаем элемент оповещения о копировании
-				copied.classList.add('copied');// добовляем класс видимости
-				document.querySelector('body').append(copied);// добовляем элемент в тело
-				copied.innerHTML = `<p>Copied!</p>`; // добовляем элемент в тело
-				$(copied).css({ // привязываем элемент к позиции курсора
-					"left": e.clientX + "px",
-					"top": e.clientY + "px"
-				});
-				function deleteCopied(){ // удаляем элемент через 2 секунды
-					copied.classList.remove('copied');
-				}; setTimeout(deleteCopied, 2000);
+		textColor.innerHTML = `<p>Copied!</p>`;
+
+				// let copied = document.createElement('div'); //созаем элемент оповещения о копировании
+				// copied.classList.add('copied');// добовляем класс видимости
+				// document.querySelector('body').append(copied);// добовляем элемент в тело
+				// copied.innerHTML = `<p>Copied!</p>`; // добовляем элемент в тело
+				// $(copied).css({ // привязываем элемент к позиции курсора
+				// 	"left": e.clientX + "px",
+				// 	"top": e.clientY + "px"
+				// });
+				// function deleteCopied(){ // удаляем элемент через 2 секунды
+				// 	copied.classList.remove('copied');
+				// }; setTimeout(deleteCopied, 2000);
 	})	
 		
 	tabsContent.forEach(function (item) {  // вешаем функцию режима БЕЗ *span.active*
