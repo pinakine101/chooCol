@@ -29,8 +29,10 @@ p {
     outline:none;
 }
 span.active {
-    border-left: 10px solid #78e4fa;;
-    border-right: 10px solid #78e4fa;;
+    border-bottom: 3px solid #ffffff;
+    border-top: 3px solid #ffffff;
+    filter: drop-shadow( 5px 0px 10px rgba(0, 0, 0, .8));
+
 } 
 input {
     border:none;
@@ -306,30 +308,7 @@ button {
   filter: drop-shadow( 2px 2px 2px rgba(0, 0, 0, .5));
 }
 
-.test1 {
-    position:relative;
-    /* display: flex; */
-    fill: rgb(225, 29, 29);
-    /* width:100%; */
-    height: 204px;
-    /* margin-bottom: 25px;
-    justify-content: center;
-    */
-}
 
-.test2 {
-    position:relative;
-    /* display: flex; */
-    fill: rgb(14, 10, 241);
-    /* width:100%; */
-    height: 200px;
-    /* width: 200px; */
-    top: 38px;
-    right:120px;
-    /* margin-bottom: 25px;
-    justify-content: center;
-    */
-}
 
 
 .icon:hover{
@@ -366,16 +345,16 @@ button {
      position: absolute;
 }
 .textColor {
-    width: 100px;
-    display: flex;
-    padding-left:80px;
+    position: absolute;
+    z-index: 2000;
+    width: 50px;
+  
+    margin-left:80px;
     font-weight:lighter;
     font-family: 'Ubundu', sans-serif;
-    font-size: 20px;
+    font-size:25px;
     color: #fffbfb;
     filter: drop-shadow( 2px 2px 2px rgba(0, 0, 0, .5));
-    display: flex;
-    width: 150px;
    
    
 }
@@ -391,7 +370,7 @@ button {
 .intro {
     display:flex; 
      width: 100%;
-     padding-bottom:79px;
+     /* padding-bottom:79px; */
      height: 100vh;
      }
 

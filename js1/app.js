@@ -57,8 +57,8 @@ let arrayHueMain = [ 353, 22, 48, 94,  159, 200, 242, 281 ];
 let arrayLight =[ 95, 92,	79,	46, 43,	22,	14,	9 ];
 
 
-let arrayHueSleep = [	259, 190, 210, 190,  70, 48, 70, 180 ];
-let arraySaturSleep = [ 20, 25,20, 10 , 40, 20, 10, 5 ];
+let arrayHueSleep = [259, 190, 210, 190,  70, 42, 70, 180 ];
+let arraySaturSleep = [ 20, 55, 60, 20 , 40, 20, 10, 5 ];
 let arrayLightSleep =[ 95, 92,	79,	46, 43,	43,	79,	92 ];
 
 
@@ -76,35 +76,36 @@ let arrayLightKids =[ 95, 92,	79,	46, 43,	43,	79,	92 ];
 
 let arrayHueCab = [	 252, 169, 246, 152, 98, 200,  217, 190,  ];
 let arraySaturCab = [	5, 5, 5, 5,  0, 5, 5, 5 ];
-let arrayLightCad =[ 95, 92, 92,	46, 27,	14,	14,	4 ];
+let arrayLightCab =[ 95, 92, 92,	46, 27,	14,	14,	4 ];
 
 let arrayHueHoll = [	 15, 27, 15, 94, 48, 43, 38, 48  ];
 let arraySaturHoll = [	10, 25, 20, 5,  0, 5, 5, 5 ];
 let arrayLightHoll =[ 95, 92, 97,	46, 79,	79,	28,	4 ];
 
 // sliceColor()
-	// let  newArrLight = arrayLight.map(function(item){
-	// 	// sliceColor(spanActive);
-	// 	let delta;
-	// 	if(result[2]<= 100 && result[2] > 97){item[i] = 100 - (result[2])}
-	// 	else if(result[2] <= 13 && result[2] >= 0) {item[i]= 0}
+	let  newArrLight = arrayLight.map(function(item){
+		sliceColor(spanActive);
+		let delta;
+		if(result[2]<= 100 && result[2] > 97){item[i] = 100 - (result[2])}
+		else if(result[2] <= 13 && result[2] >= 0) {item[i]= 0}
 	
-	// 	else if(result[2] <= item[0]  && result[2] >=  item[1])   {item[0] -(result[2]/8)}
-	// 	else if(result[2] <= item[1]  && result[2] >=  item[2])   {item[1] -(result[2]/8)}
-	// 	else if(result[2] <= item[2]  && result[2] >=  item[3])   {item[2] -(result[2]/8)}
-	// 	else if(result[2] <= item[3]  && result[2] >=  item[4])   {item[3] -(result[2]/8)}
-	// 	else if(result[2] <= item[4]  && result[2] >=  item[5])   {item[4] -(result[2]/8)}
-	// 	else if(result[2] <= item[5]  && result[2] >=  item[6])   {item[5] -(result[2]/8)}
-	// 	else if(result[2] <= item[6]  && result[2] >=  item[7])   {item[6] -(result[2]/8)}
-	// 	else if(result[2] <= item[7]  && result[2] >=  item[0])   {item[7] -(result[2]/8)}
+		else if(result[2] <= item[0]  && result[2] >=  item[1])   {item[0] -(result[2]/8)}
+		else if(result[2] <= item[1]  && result[2] >=  item[2])   {item[1] -(result[2]/8)}
+		else if(result[2] <= item[2]  && result[2] >=  item[3])   {item[2] -(result[2]/8)}
+		else if(result[2] <= item[3]  && result[2] >=  item[4])   {item[3] -(result[2]/8)}
+		else if(result[2] <= item[4]  && result[2] >=  item[5])   {item[4] -(result[2]/8)}
+		else if(result[2] <= item[5]  && result[2] >=  item[6])   {item[5] -(result[2]/8)}
+		else if(result[2] <= item[6]  && result[2] >=  item[7])   {item[6] -(result[2]/8)}
+		else if(result[2] <= item[7]  && result[2] >=  item[0])   {item[7] -(result[2]/8)}
 		
-	// return item - 5;
-	// });
+	return item - 5;
+	});
 	
-
-	// let newArrHue= arrayHueMain.map((item)=>{
-	// 	return item + (result[0])
-	// });
+	
+	let newArrHue= arrayHueMain.map((item)=>{
+		sliceColor(spanActive);
+		return item-(item/2);
+	});
 
 
 
@@ -139,7 +140,7 @@ let arrayLightHoll =[ 95, 92, 97,	46, 79,	79,	28,	4 ];
 			findColorName(); //вызываем имя цвета
 
 			// проверяем на класс и добавляем имя цвета
-			textColor.innerHTML = `<button> ${textColorBuffer} </button>`;
+			textColor.innerHTML = `<hexColor> ${textColorBuffer} </hexColor>`;
 
 			editButtns[0].removeEventListener('click', calcCouPlus);//удаляем пребор гаммы в "+" без *span.active*  
 			editButtns[1].removeEventListener('click', calcCouMinus); //удаляем пребор гаммы в "-" без *span.active*  
@@ -148,7 +149,7 @@ let arrayLightHoll =[ 95, 92, 97,	46, 79,	79,	28,	4 ];
 			window.removeEventListener('mousemove', sorTable); //удаляем возможность перетаскивания блоков
 			
 			sliceColor()
-			
+		
 			console.log(result[0], result[1], result[2]);
 		
 		}
@@ -202,14 +203,13 @@ let arrayLightHoll =[ 95, 92, 97,	46, 79,	79,	28,	4 ];
 
     function actCalcCouPus(){ // запускаем перебор гаммы в *+* режима  *span.active*
 		counterPlus(arrStyleColor);
-		separateGamms ();
+		actColorCalc(newArrHue, arraySaturGost,  newArrLight)
 		
 	};
 	function actCalcCouMinus(){ // запускаем перебор гаммы в *-* режима *span.active*
 		
 		counterMinus(arrStyleColor);
-		separateGamms ();
-		
+		actColorCalc(newArrHue, arraySaturGost,  newArrLight)
 	}
 	//_______Buttuns_______///
 
@@ -275,9 +275,7 @@ let arrayLightHoll =[ 95, 92, 97,	46, 79,	79,	28,	4 ];
 				if (tabsBtn[6].classList.contains('active')){
 					$(newColor).css("background-color", `hsl(${arrayHueGost[cou1]}, ${arraySaturGost[cou1]}%, ${ arrayLight[cou1]}%)`);
 				};
-				if (tabsBtn[7].classList.contains('active')){
-					$(newColor).css("background-color", `hsl(${arrayHueGost[cou1]}, ${arraySaturGost[cou1]}%, ${ arrayLight[cou1]}%)`);
-				};
+				
 			};
 		});
 	};
@@ -383,7 +381,7 @@ let arrayLightHoll =[ 95, 92, 97,	46, 79,	79,	28,	4 ];
 	onClickTab(tabsBtn[4]);
 	onClickTab(tabsBtn[5]);
 	onClickTab(tabsBtn[6]);
-	onClickTab(tabsBtn[7]);	
+
 	
 
 	//______ColorPicker_________//
@@ -803,17 +801,14 @@ let arrayLightHoll =[ 95, 92, 97,	46, 79,	79,	28,	4 ];
 		let xAbs = Math.abs(clickStartX - clickEndX);
 		let yAbs = Math.abs(clickStartY - clickEndY);
 
-		sliceColor();
 		
 		if (xAbs >10 || yAbs > 10) {
 			
 			if (xAbs > yAbs) {
-				if (clickEndX < clickStartX && result[2] < 94 ) {
-					// counterPlus(spaRoomColor1);
-					
+				if (clickEndX < clickStartX ) {
+					counterPlus( arrayHueSleep );
 					$('span.active').css('backgroundColor', 
-					`hsl(${+ result[0]}, ${+ result[1]}%, ${ + result[2] +5 }%)`);
-					
+					`hsl(${ arrayHueSleep[cou1] }, ${ arraySaturSleep[cou1] }%, ${ arrayLightSleep [cou1] }%)`);
 					console.log('left')
 				} else if(result[2] > 10) {
 					// counterMinus(spaRoomColor1);
