@@ -98,7 +98,7 @@ let arrayLightHoll =[ 95, 92, 97,	46, 79,	79,	28,	4 ];
 		else if(result[2] <= item[6]  && result[2] >=  item[7])   {item[6] -(result[2]/8)}
 		else if(result[2] <= item[7]  && result[2] >=  item[0])   {item[7] -(result[2]/8)}
 		
-	return item - 5;
+	return item - result[2];
 	});
 	
 	
@@ -140,7 +140,7 @@ let arrayLightHoll =[ 95, 92, 97,	46, 79,	79,	28,	4 ];
 			findColorName(); //вызываем имя цвета
 
 			// проверяем на класс и добавляем имя цвета
-			textColor.innerHTML = `<hexColor> ${textColorBuffer} </hexColor>`;
+			textColor.innerHTML = `<div> ${textColorBuffer} </div>`;
 
 			editButtns[0].removeEventListener('click', calcCouPlus);//удаляем пребор гаммы в "+" без *span.active*  
 			editButtns[1].removeEventListener('click', calcCouMinus); //удаляем пребор гаммы в "-" без *span.active*  
@@ -172,22 +172,18 @@ let arrayLightHoll =[ 95, 92, 97,	46, 79,	79,	28,	4 ];
 				
 		};
 
-	textColor.addEventListener('click', (e)=>{
-		// navigator.clipboard.writeText(textColorBuffer); 	//пишем в буфер обмена имя цвета
-		
-
-				let copied = document.createElement('div'); //созаем элемент оповещения о копировании
-				copied.classList.add('copied');// добовляем класс видимости
-				document.querySelector('body').append(copied);// добовляем элемент в тело
-				copied.innerHTML = `<p>Copied!</p>`; // добовляем элемент в тело
-				$(copied).css({ // привязываем элемент к позиции курсора
-					"left": e.clientX + "px",
-					"top": e.clientY + "px"
-				});
-				function deleteCopied(){ // удаляем элемент через 2 секунды
-					copied.classList.remove('copied');
-				}; setTimeout(deleteCopied, 2000);
-	})	
+	textColor.addEventListener('click', ()=>{
+		navigator.clipboard.writeText(textColorBuffer); 	//пишем в буфер обмена имя цвета
+		textColor.remove();
+		let copied = document.createElement('div'); //созаем элемент оповещения о копировании
+		copied.classList.add('textColor');// добовляем класс видимости
+		copied.innerHTML = `<div>Copied!</div>`; // добовляем элемент в тело
+		document.querySelector('span.active').append(copied);// добовляем элемент в тело
+		function deleteCopied(){ // удаляем элемент через 1 секунды
+			copied.remove();
+		}; 
+		setTimeout(deleteCopied, 1000);
+	});	
 		
 	tabsContent.forEach(function (item) {  // вешаем функцию режима БЕЗ *span.active*
 		item.addEventListener('dblclick', deletActivColor);
@@ -212,7 +208,9 @@ let arrayLightHoll =[ 95, 92, 97,	46, 79,	79,	28,	4 ];
 		
 		counterMinus(arrStyleColor);
 		actColorCalc(newArrHue, arraySaturGost,  newArrLight)
-	}
+	};
+
+
 	//_______Buttuns_______///
 
 
@@ -300,6 +298,28 @@ let arrayLightHoll =[ 95, 92, 97,	46, 79,	79,	28,	4 ];
 			console.log(axisSort);
 		});
 	});
+//______ToolTip___________//
+$("[data-tooltip]").mousemove(function (eventObject) {
+
+	let data_tooltip = $(this).attr("data-tooltip");
+	
+	$("#tooltip").text(data_tooltip)
+				 .css({ 
+					 "top" : eventObject.pageY + 5,
+					"left" : eventObject.pageX + 5
+				 })
+				 .show();
+
+}).mouseout(function () {
+
+	$("#tooltip").hide()
+				 .text("")
+				 .css({
+					 "top" : 0,
+					"left" : 0
+				 });
+});
+
 
 	//_______Tabs_________//
 
