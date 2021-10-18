@@ -82,6 +82,22 @@ let arrayHueHoll = [	 15, 27, 15, 94, 48, 43, 38, 48  ];
 let arraySaturHoll = [	10, 25, 20, 5,  0, 5, 5, 5 ];
 let arrayLightHoll =[ 95, 92, 97,	46, 79,	79,	28,	4 ];
 
+
+
+function sliceColor(){
+	let actCol = document.querySelector('span.active');
+	$(actCol).each(function () {
+		const color = $(this).css("backgroundColor"),
+			[r, g, b] = color.match(/\d+/g);
+		const colHsl = RGB2HSL(r, g, b);
+		result = /hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)/g.exec(colHsl).slice(1);
+		
+		return result;
+	});
+	// return e;
+	
+};
+
 // sliceColor()
 	let  newArrLight = arrayLight.map(function(item){
 		sliceColor(spanActive);
@@ -97,14 +113,16 @@ let arrayLightHoll =[ 95, 92, 97,	46, 79,	79,	28,	4 ];
 		else if(result[2] <= item[5]  && result[2] >=  item[6])   {item[5] -(result[2]/8)}
 		else if(result[2] <= item[6]  && result[2] >=  item[7])   {item[6] -(result[2]/8)}
 		else if(result[2] <= item[7]  && result[2] >=  item[0])   {item[7] -(result[2]/8)}
-		
-	return item - result[2];
+		console.log(result[2])
+	return + item - 20;
 	});
 	
 	
 	let newArrHue= arrayHueMain.map((item)=>{
 		sliceColor(spanActive);
+		console.log(spanActive)
 		return item-(item/2);
+		
 	});
 
 
@@ -144,13 +162,13 @@ let arrayLightHoll =[ 95, 92, 97,	46, 79,	79,	28,	4 ];
 
 			editButtns[0].removeEventListener('click', calcCouPlus);//удаляем пребор гаммы в "+" без *span.active*  
 			editButtns[1].removeEventListener('click', calcCouMinus); //удаляем пребор гаммы в "-" без *span.active*  
-			editButtns[0].addEventListener('click', actCalcCouPus); //добавляем пребор гаммы в "+" с *span.active*  
+			editButtns[0].addEventListener('click', actCalcCouPlus); //добавляем пребор гаммы в "+" с *span.active*  
 			editButtns[1].addEventListener('click', actCalcCouMinus); //добавляем пребор гаммы в "-" с *span.active*  
 			window.removeEventListener('mousemove', sorTable); //удаляем возможность перетаскивания блоков
 			
 			sliceColor()
 		
-			console.log(result[0], result[1], result[2]);
+			// console.log(result[0], result[1], result[2]);
 		
 		}
 
@@ -164,7 +182,7 @@ let arrayLightHoll =[ 95, 92, 97,	46, 79,	79,	28,	4 ];
 				textColor.remove();
 				editButtns[0].addEventListener('click', calcCouPlus);  //добовляем оброботчики перебора гаммы в режиме  *span.active*
 				editButtns[1].addEventListener('click', calcCouMinus);
-				editButtns[0].removeEventListener('click', actCalcCouPus); //удаляем оброботчики перебора гаммы в режиме БЕЗ *span.active*
+				editButtns[0].removeEventListener('click', actCalcCouPlus); //удаляем оброботчики перебора гаммы в режиме БЕЗ *span.active*
 				editButtns[1].removeEventListener('click', actCalcCouMinus);
 				window.addEventListener('mousemove', sorTable); //включаем возможность перетаскивания блоков
 				
@@ -199,15 +217,17 @@ let arrayLightHoll =[ 95, 92, 97,	46, 79,	79,	28,	4 ];
 		separateGamms ();
 	};
 
-    function actCalcCouPus(){ // запускаем перебор гаммы в *+* режима  *span.active*
+    function actCalcCouPlus(){ // запускаем перебор гаммы в *+* режима  *span.active*
 		counterPlus(arrStyleColor);
 		actColorCalc(newArrHue, arraySaturGost,  newArrLight)
+		console.log('privet')
 		
 	};
 	function actCalcCouMinus(){ // запускаем перебор гаммы в *-* режима *span.active*
 		
 		counterMinus(arrStyleColor);
 		actColorCalc(newArrHue, arraySaturGost,  newArrLight)
+	
 	};
 
 
@@ -298,6 +318,21 @@ let arrayLightHoll =[ 95, 92, 97,	46, 79,	79,	28,	4 ];
 			console.log(axisSort);
 		});
 	});
+
+//_____Load Image_____///
+
+// $('#f').on('change', function(ev) {
+//     var f = ev.target.files[0];
+//     var fr = new FileReader();
+    
+//     fr.onload = function(ev2) {
+//         console.dir(ev2);
+//         $('#i').attr('src', ev2.target.result);
+//     };
+    
+//     fr.readAsDataURL(f);
+// });
+
 //______ToolTip___________//
 $("[data-tooltip]").mousemove(function (eventObject) {
 
@@ -453,19 +488,7 @@ $("[data-tooltip]").mousemove(function (eventObject) {
 
 
 
-	function sliceColor(){
-		let actCol = document.querySelector('span.active');
-		$(actCol).each(function () {
-			const color = $(this).css("backgroundColor"),
-				[r, g, b] = color.match(/\d+/g);
-			const colHsl = RGB2HSL(r, g, b);
-			result = /hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)/g.exec(colHsl).slice(1);
-			
-			return result;
-		});
-		// return e;
-		
-	};
+
 	
 	function actColorCalc(gammaHue, gammaSat, gammaLight ) {
 	
@@ -665,7 +688,7 @@ $("[data-tooltip]").mousemove(function (eventObject) {
 		if (cou6 > a.length-1) {cou6 = 0};
 		if (cou7 > a.length-1) {cou7 = 0};
 		if (cou8 > a.length-1) {cou8 = 0};
-			console.log('plus')
+		
 			return a;
 	};
 
@@ -679,7 +702,7 @@ $("[data-tooltip]").mousemove(function (eventObject) {
 		if (cou6 < 0) {cou6 = a.length-1};
 		if (cou7 < 0) {cou7 = a.length-1};
 		if (cou8 < 0) {cou8 = a.length-1};
-			console.log('minus');
+			
 		return a;
 	}
 	
