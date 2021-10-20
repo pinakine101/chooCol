@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	let tabsContent = document.querySelectorAll(".intro_1"); //содержимое в ТАБЕ
 	// let tabsNav = document.querySelector(".tabs__nav"); 
 	// let intro = document.querySelector(".intro")
-	// let colors = document.querySelectorAll('span');
+	let colors = document.querySelectorAll('span');
 	let icon = document.querySelector('.icon'); // кнопка рандомного подбора
 	let editButtns = document.querySelectorAll('.butt'); // кнопки редактирования гаммы
 	let result = []; // цвет разделенный на HSL каналы в массиве из трёх значений
@@ -94,36 +94,14 @@ function sliceColor(){
 		
 		return result;
 	});
-	// return e;
+	
 	
 };
 
-// sliceColor()
-	let  newArrLight = arrayLight.map(function(item){
-		sliceColor(spanActive);
-		let delta;
-		if(result[2]<= 100 && result[2] > 97){item[i] = 100 - (result[2])}
-		else if(result[2] <= 13 && result[2] >= 0) {item[i]= 0}
+// sliceColor(color1);
+
 	
-		else if(result[2] <= item[0]  && result[2] >=  item[1])   {item[0] -(result[2]/8)}
-		else if(result[2] <= item[1]  && result[2] >=  item[2])   {item[1] -(result[2]/8)}
-		else if(result[2] <= item[2]  && result[2] >=  item[3])   {item[2] -(result[2]/8)}
-		else if(result[2] <= item[3]  && result[2] >=  item[4])   {item[3] -(result[2]/8)}
-		else if(result[2] <= item[4]  && result[2] >=  item[5])   {item[4] -(result[2]/8)}
-		else if(result[2] <= item[5]  && result[2] >=  item[6])   {item[5] -(result[2]/8)}
-		else if(result[2] <= item[6]  && result[2] >=  item[7])   {item[6] -(result[2]/8)}
-		else if(result[2] <= item[7]  && result[2] >=  item[0])   {item[7] -(result[2]/8)}
-		console.log(result[2])
-	return + item - 20;
-	});
-	
-	
-	let newArrHue= arrayHueMain.map((item)=>{
-		sliceColor(spanActive);
-		console.log(spanActive)
-		return item-(item/2);
-		
-	});
+
 
 
 
@@ -137,7 +115,7 @@ function sliceColor(){
 				let color = $('span.active').css("background-color");
 				//помещаем в  переменную *textColorBuffer*  имя HEX активного цвета
 				textColorBuffer = rgb2hex(color);
-				sliceColor(spanActive);
+				// sliceColor(spanActive);
 			};
 		});
 	};
@@ -166,7 +144,7 @@ function sliceColor(){
 			editButtns[1].addEventListener('click', actCalcCouMinus); //добавляем пребор гаммы в "-" с *span.active*  
 			window.removeEventListener('mousemove', sorTable); //удаляем возможность перетаскивания блоков
 			
-			sliceColor()
+			// sliceColor()
 		
 			// console.log(result[0], result[1], result[2]);
 		
@@ -219,14 +197,15 @@ function sliceColor(){
 
     function actCalcCouPlus(){ // запускаем перебор гаммы в *+* режима  *span.active*
 		counterPlus(arrStyleColor);
-		actColorCalc(newArrHue, arraySaturGost,  newArrLight)
+	
+		actColorCorrect(newArrHue, arraySaturGost,  newArrLight)
 		console.log('privet')
 		
 	};
 	function actCalcCouMinus(){ // запускаем перебор гаммы в *-* режима *span.active*
 		
 		counterMinus(arrStyleColor);
-		actColorCalc(newArrHue, arraySaturGost,  newArrLight)
+		actColorCorrect(newArrHue, arraySaturGost,  newArrLight)
 	
 	};
 
@@ -277,24 +256,24 @@ function sliceColor(){
 				if (tabsBtn[0].classList.contains('active')){
 					$(newColor).css("background-color", `hsl(${arrayHueSleep[y]}, ${arraySaturSleep[y]}%, ${ arrayLight[y]}%)`);
 				};
-				if (tabsBtn[1].classList.contains('active')){
-					$(newColor).css("background-color", `hsl(${arrayHueGost[cou1]}, ${arraySaturGost[cou1]}%, ${ arrayLight[cou1]}%)`);
-				};
-				if (tabsBtn[2].classList.contains('active')){
-					$(newColor).css("background-color", `hsl(${arrayHueKitch[cou1]}, ${arraySaturKitch[cou1]}%, ${ arrayLight[cou1]}%)`);
-				};
-				if (tabsBtn[3].classList.contains('active')){
-					$(newColor).css("background-color", `hsl(${ arrayHueKids[cou1]}, ${arraySaturKids[cou1]}%, ${ arrayLight[cou1]}%)`);
-				};
-				if (tabsBtn[4].classList.contains('active')){
-					$(newColor).css("background-color", `hsl(${arrayHueGost[cou1]}, ${arraySaturGost[cou1]}%, ${ arrayLight[cou1]}%)`);
-				};
-				if (tabsBtn[5].classList.contains('active')){
-					$(newColor).css("background-color", `hsl(${arrayHueGost[cou1]}, ${arraySaturGost[cou1]}%, ${ arrayLight[cou1]}%)`);
-				};
-				if (tabsBtn[6].classList.contains('active')){
-					$(newColor).css("background-color", `hsl(${arrayHueGost[cou1]}, ${arraySaturGost[cou1]}%, ${ arrayLight[cou1]}%)`);
-				};
+				// if (tabsBtn[1].classList.contains('active')){
+				// 	$(newColor).css("background-color", `hsl(${arrayHueGost[cou1]}, ${arraySaturGost[cou1]}%, ${ arrayLight[cou1]}%)`);
+				// };
+				// if (tabsBtn[2].classList.contains('active')){
+				// 	$(newColor).css("background-color", `hsl(${arrayHueKitch[cou1]}, ${arraySaturKitch[cou1]}%, ${ arrayLight[cou1]}%)`);
+				// };
+				// if (tabsBtn[3].classList.contains('active')){
+				// 	$(newColor).css("background-color", `hsl(${ arrayHueKids[cou1]}, ${arraySaturKids[cou1]}%, ${ arrayLight[cou1]}%)`);
+				// };
+				// if (tabsBtn[4].classList.contains('active')){
+				// 	$(newColor).css("background-color", `hsl(${arrayHueGost[cou1]}, ${arraySaturGost[cou1]}%, ${ arrayLight[cou1]}%)`);
+				// };
+				// if (tabsBtn[5].classList.contains('active')){
+				// 	$(newColor).css("background-color", `hsl(${arrayHueGost[cou1]}, ${arraySaturGost[cou1]}%, ${ arrayLight[cou1]}%)`);
+				// };
+				// if (tabsBtn[6].classList.contains('active')){
+				// 	$(newColor).css("background-color", `hsl(${arrayHueGost[cou1]}, ${arraySaturGost[cou1]}%, ${ arrayLight[cou1]}%)`);
+				// };
 				
 			};
 		});
@@ -395,7 +374,7 @@ $("[data-tooltip]").mousemove(function (eventObject) {
 	
 
 	if(tabsContent[0].getAttribute('id') == 'sleepRoom'){
-			actColorCalc( arrayHueSleep, arraySaturSleep, arrayLightSleep) };	
+		actColorCorrect( arrayHueSleep, arraySaturSleep, arrayLightSleep, calcGamma) };	
 
 	$(tabsBtn).on('click',  clickTabsBtn);
 
@@ -404,25 +383,25 @@ $("[data-tooltip]").mousemove(function (eventObject) {
 	function separateGamms (){
 
 		if(tabsBtn[0].classList.contains('active')){
-				actColorCalc( arrayHueSleep, arraySaturSleep,  arrayLightSleep)
+			actColorCorrect( arrayHueSleep, arraySaturSleep,  arrayLightSleep, calcGamma)
 						}		
 			else if(tabsBtn[1].classList.contains('active')){
-				actColorCalc(arrayHueGost, arraySaturGost,  arrayLight)
+				actColorCorrect(arrayHueGost, arraySaturGost,  arrayLight)
 					}
 			else if(tabsBtn[2].classList.contains('active')){
-				actColorCalc(arrayHueKitch, arraySaturKitch,  arrayLight)
+				actColorCorrect(arrayHueKitch, arraySaturKitch,  arrayLight)
 				}
 			else if(tabsBtn[3].classList.contains('active')){
-				actColorCalc(arrayHueKids, arraySaturKids,  arrayLightKids)
+				actColorCorrect(arrayHueKids, arraySaturKids,  arrayLightKids)
 				}
 			else if(tabsBtn[4].classList.contains('active')){
-				actColorCalc(arrayHueCab, arraySaturCab, arrayLightCad)
+				actColorCorrect(arrayHueCab, arraySaturCab, arrayLightCab)
 				}
 			else if(tabsBtn[5].classList.contains('active')){
-				actColorCalc(arrayHueHoll, arraySaturHoll, arrayLightHoll)
+				actColorCorrect(arrayHueHoll, arraySaturHoll, arrayLightHoll)
 				}
 			else if(tabsBtn[6].classList.contains('active')){
-					actColorCalc(arrayHueHoll, arraySaturHoll, arrayLightCad)
+				actColorCorrect(arrayHueHoll, arraySaturHoll, arrayLightCab)
 					}
 	};	
 
@@ -485,15 +464,36 @@ $("[data-tooltip]").mousemove(function (eventObject) {
 	/*______CalcColor____________________
 	из выбранного цвета генерируется массив цветов в 
 	8 параметрах тона и в 8 параметрах цвета_*/
-
-
-
-
+	function calcGamma(){
+		if(tabsBtn[0].classList.contains('active')){
+			let  newArrLight = arrayLight.map(function(item){
+				
+				if(result[2]<= 100 && result[2] > 97){item = 100 - (result[2])}
+				else if(result[2] <= 13 && result[2] >= 0) {item = 0}
+			
+				else if(result[2] <= item[0]  && result[2] >=  item[1])   {item[0] -(result[2]/8)}
+				else if(result[2] <= item[1]  && result[2] >=  item[2])   {item[1] -(result[2]/8)}
+				else if(result[2] <= item[2]  && result[2] >=  item[3])   {item[2] -(result[2]/8)}
+				else if(result[2] <= item[3]  && result[2] >=  item[4])   {item[3] -(result[2]/8)}
+				else if(result[2] <= item[4]  && result[2] >=  item[5])   {item[4] -(result[2]/8)}
+				else if(result[2] <= item[5]  && result[2] >=  item[6])   {item[5] -(result[2]/8)}
+				else if(result[2] <= item[7]  && result[2] >=  item[0])   {item[7] -(result[2]/8)}
+				console.log(result[2])
+				return item - 20 ;
+				});
+			let newArrHue= arrayHueMain.map((item)=>{
+				// sliceColor();
+				return item-10;
+			});
+				
+		};
+	};
 	
-	function actColorCalc(gammaHue, gammaSat, gammaLight ) {
+	function actColorCorrect(gammaHue, gammaSat, gammaLight, callback ) {
 	
+		
 					tabsContent.forEach((item, i)=>{
-						
+						sliceColor()
 					if(tabsBtn[i].classList.contains('active')){
 					
 						   if( gammaHue[cou1] >= 0  && gammaHue[cou1] <=22)  
@@ -594,9 +594,9 @@ $("[data-tooltip]").mousemove(function (eventObject) {
 			$('span.active').css('backgroundColor', `hsl(${result[0]}, ${result[1]}%, ${result[2]}%)`);
 			
 		});
-	
-		return gammaHue, gammaSat, gammaLight;
-			
+		callback();	
+		// return gammaHue, gammaSat, gammaLight;
+		
 	};
 
 	
