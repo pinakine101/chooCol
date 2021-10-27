@@ -297,12 +297,12 @@ document.addEventListener('DOMContentLoaded', () => {
 		
 //_____Load Image_____///
 
-console.log(editButtns[5])
+
 
 // let load = document.querySelector('#load');
-$('#load').click(function(){
-$('#file').click();
-});
+// $('#load').click(function(){
+// $('#file').click();
+// });
 // editButtns[5].addEventListener('click', function (){
 // 	const file = document.getElementById('file');
 // 	$(file).click();
