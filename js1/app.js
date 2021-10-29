@@ -117,32 +117,48 @@ document.addEventListener('DOMContentLoaded', () => {
 						//помещаем в  переменную *textColorBuffer*  имя HEX активного цвета
 						textColorBuffer = rgb2hex(color);
 						sliceColor();
-						console.log(textColorBuffer)
 					};
 				});
 			};
 		
 			function activeColor(e){ //функионал режима *span.active*
-				
+				let spanActive = document.querySelector('span.active');
 				const target = e.target; //получаем элемент клика	
+				let activeImg = $(target).children('img');
 				//если клик не на *span.active* убираем класс *active, скрываем контейнер с именем цвета
 				if (!target.classList.contains("active")) {
 					$(tabsContent).children().removeClass('active');
+				
 					textColor.classList.remove('textColor');
 				};
-
-				textColor.classList.add('textColor'); // показываем контейнер с именем цвета, добовляем *active,
+				// $(tabsContent).children(spanActive).addClass('active')
 				target.classList.add('active');
+				if(target.classList.contains('loadImg')){
+					target.parentNode.classList.add('active')
+				}
+				else{target.parentNode.classList.remove('active')}
+				// let imgActive = spanActive.querySelector('.loadImg');
 				
-				target.append(textColor);  //добовляем контейнер с именем цвета
-			
-				findColorName(); //вызываем имя цвета
-				textColor.innerHTML = `<div> ${textColorBuffer} </div>`;//  добавляем имя цвета
-				description.innerHTML = `<input type='text'	id = "description" value = "description"></input>`;
+				// activeImg.classList.add('active');
+
+				// $(spanActive).children().classList.add('active');
 				
+				// let imgActive = spanActive.querySelector('.loadImg');
 				
 
-	
+				// if(!imgActive.classList.contains('active')){
+				// 	$(tabsContent).children().removeClass('active');
+				// 	imgActive.classList.add('active');
+				// };
+			
+				textColor.classList.add('textColor'); // показываем контейнер с именем цвета, добовляем *active,
+				
+				findColorName(); //вызываем имя цвета
+				textColor.innerHTML = textColorBuffer;//  добавляем имя цвета
+				target.append(textColor);  //добовляем контейнер с именем цвета
+				console.log(activeImg)
+				// description.innerHTML = `<input type='text'	id = "description" value = "description"></input>`;
+				
 				editButtns[0].removeEventListener('click', calcCouPlus);//удаляем пребор гаммы в "+" без *span.active*  
 				editButtns[1].removeEventListener('click', calcCouMinus); //удаляем пребор гаммы в "-" без *span.active*  
 				editButtns[0].addEventListener('click', actCalcCouPus); //добавляем пребор гаммы в "+" с *span.active*  
