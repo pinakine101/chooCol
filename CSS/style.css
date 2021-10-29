@@ -17,9 +17,7 @@ body {
 /* button {
     text-decoration: none;
 } */
-li {
-    list-style: none;
-}
+
 
 p {
     color: #ffffff;
@@ -43,19 +41,19 @@ img {
     overflow: hidden;
 }
 input {
-    display: none;
-    /* background: url(load.svg) no-repeat center left;
+    /* display: none; */
+   
     border:none;
     background:none;
-   text-emphasis: none;
-    width: 200px; */
-    /* display: flex;
+ 
+    width: 200px; 
+   display: flex; 
     padding:0;
     font-weight:lighter;
     font-family: 'Ubundu', sans-serif;
-    font-size: 40px;
+    font-size: 18px;
     color: #fffbfb;
-    filter: drop-shadow( 2px 2px 2px rgba(0, 0, 0, .5)); */
+    
 }
 button {
     border:none;
@@ -347,6 +345,11 @@ button {
     /* position: absolute;
     z-index: 2100; */
 }
+.loadImg.active{
+    border-bottom: 3px solid #ffffff;
+    border-top: 3px solid #ffffff;
+    filter: drop-shadow( 5px 0px 10px rgba(0, 0, 0, .8));
+}
 /*intro
 =================*/
 
@@ -356,7 +359,7 @@ button {
 .textColor {
     position: absolute;
     z-index: 2000;
-    /* width: 50px; */
+    width: 50px;
     margin-left:110px;
     margin-top:30px;
     font-weight:lighter;

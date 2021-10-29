@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		// let spanActive = $('span.active');
 		let spanActive = document.querySelector('span.active');
 		let textColorBuffer; // содержит имя цвета
-		let textColor = document.createElement('textCol'); // показывает имя цвета
+		let textColor = document.createElement('div'); // показывает имя цвета
 		let forslice ;
 		let mainColor;
 	
@@ -109,35 +109,39 @@ document.addEventListener('DOMContentLoaded', () => {
 		//______Active Color_________//
 	
 		
-		function findColorName(e) {
-			// находим в активном табе активный цвет 
-			tabsContent.forEach((item, i) => {
-				if (tabsBtn[i].classList.contains('active')) {
-					let color = $('span.active').css("background-color");
-					//помещаем в  переменную *textColorBuffer*  имя HEX активного цвета
-					textColorBuffer = rgb2hex(color);
-					sliceColor(spanActive);
-				};
-			});
-		};
+			function findColorName(e) {
+				// находим в активном табе активный цвет 
+				tabsContent.forEach((item, i) => {
+					if (tabsBtn[i].classList.contains('active')) {
+						let color = $('span.active').css("background-color");
+						//помещаем в  переменную *textColorBuffer*  имя HEX активного цвета
+						textColorBuffer = rgb2hex(color);
+						sliceColor();
+						console.log(textColorBuffer)
+					};
+				});
+			};
 		
 			function activeColor(e){ //функионал режима *span.active*
-				//получаем элемент клика	
-				const target = e.target;
+				
+				const target = e.target; //получаем элемент клика	
 				//если клик не на *span.active* убираем класс *active, скрываем контейнер с именем цвета
 				if (!target.classList.contains("active")) {
 					$(tabsContent).children().removeClass('active');
 					textColor.classList.remove('textColor');
 				};
+
 				textColor.classList.add('textColor'); // показываем контейнер с именем цвета, добовляем *active,
 				target.classList.add('active');
-	
+				
 				target.append(textColor);  //добовляем контейнер с именем цвета
-	
+			
 				findColorName(); //вызываем имя цвета
-	
-				// проверяем на класс и добавляем имя цвета
-				textColor.innerHTML = `<div> ${textColorBuffer} </div>`;
+				textColor.innerHTML = `<div> ${textColorBuffer} </div>`;//  добавляем имя цвета
+				// description.innerHTML = `<input type='text'	id = "description" value = "description"></input>`;
+				
+				
+
 	
 				editButtns[0].removeEventListener('click', calcCouPlus);//удаляем пребор гаммы в "+" без *span.active*  
 				editButtns[1].removeEventListener('click', calcCouMinus); //удаляем пребор гаммы в "-" без *span.active*  
@@ -145,16 +149,12 @@ document.addEventListener('DOMContentLoaded', () => {
 				editButtns[1].addEventListener('click', actCalcCouMinus); //добавляем пребор гаммы в "-" с *span.active*  
 				window.removeEventListener('mousemove', sorTable); //удаляем возможность перетаскивания блоков
 				
-				sliceColor()
-				
-				console.log(result[0], result[1], result[2]);
-			
 			}
 	
-		tabsContent.forEach(function (item, i) { // вешаем на контейнер с цветами фунцию активного цвета
-			item.addEventListener('click', activeColor);
-		});
-	
+			tabsContent.forEach(function (item, i) { // вешаем на контейнер с цветами фунцию активного цвета
+				item.addEventListener('click', activeColor);
+			});
+
 			function deletActivColor(e){  //функионал режима БЕЗ *span.active*
 				const target = e.target;
 					target.classList.remove('active');
@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				textColor.remove();
 				let copied = document.createElement('div'); //созаем элемент оповещения о копировании
 				copied.classList.add('textColor');// добовляем класс видимости
-				copied.innerHTML = `<div>Copied!</div>`; // добовляем элемент в тело
+				copied.innerHTML = `<div>Copied!</div>`; // добовляем строку элемнта
 				document.querySelector('span.active').append(copied);// добовляем элемент в тело
 				function deleteCopied(){ // удаляем элемент через 1 секунды
 					copied.remove();
@@ -295,77 +295,9 @@ document.addEventListener('DOMContentLoaded', () => {
 			});
 		});
 		
-//_____Load Image_____///
 
 
 
-// let load = document.querySelector('#load');
-// $('#load').click(function(){
-// $('#file').click();
-// });
-// editButtns[5].addEventListener('click', function (){
-// 	const file = document.getElementById('file');
-// 	$(file).click();
-// 	// onclick=".click();
-// } );
-
-// function  openFile(event) {
-//     var input = event.target;
-
-//     var reader = new FileReader();
-//     reader.onload = function(){
-//       var dataURL = reader.result;
-//       var output = document.getElementById('output');
-//       output.src = dataURL;
-//     };
-//     reader.readAsDataURL(input.files[0]);
-//   };
-
-//   $('#load').on('change',  openFile);
-
-// function changeHandler(evt) {
-//     evt.stopPropagation();
-//     evt.preventDefault();
-
-//     // FileList object.
-//     var files = evt.target.files;
-
-//     var file = files[0];
-
-//     var fileReader = new FileReader();
-
-
-//     fileReader.onload = function(progressEvent) {
-//         var url = fileReader.result;
-
-//         // Something like: data:image/png;base64,iVBORw...Ym57Ad6m6uHj96js
-//         console.log(url);
-//         //
-//         var myImg = document.getElementById("img");
-//         myImg.src= url;
-//     }
-
-
-//     // Read file asynchronously.
-//     fileReader.readAsDataURL(file); // fileReader.result -> URL.
-// };
-
-
-
-// $('#load').on('change', function(ev) {
-//     var f = ev.target.files[0];
-//     var fr = new FileReader();
-   
-//     fr.onload = function(ev2) {
-//         console.dir(ev2);
-	
-// 		  $('#img').attr('src', ev2.target.result);
-	
-//     };
-   
-//     fr.readAsDataURL(f);
-	
-// });
 
 		//_______Tabs_________//
 	
@@ -402,6 +334,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			}; 
 			
 		};
+
 		counterPlus(arrStyleColor);
 		
 	
