@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			
 				findColorName(); //вызываем имя цвета
 				textColor.innerHTML = `<div> ${textColorBuffer} </div>`;//  добавляем имя цвета
-				// description.innerHTML = `<input type='text'	id = "description" value = "description"></input>`;
+				description.innerHTML = `<input type='text'	id = "description" value = "description"></input>`;
 				
 				
 
