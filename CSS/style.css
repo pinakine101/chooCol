@@ -17,9 +17,7 @@ body {
 /* button {
     text-decoration: none;
 } */
-li {
-    list-style: none;
-}
+
 
 p {
     color: #ffffff;
@@ -29,21 +27,33 @@ p {
     outline:none;
 }
 span.active {
-    border-left: 10px solid #78e4fa;;
-    border-right: 10px solid #78e4fa;;
+    border-bottom: 3px solid #ffffff;
+    border-top: 3px solid #ffffff;
+    filter: drop-shadow( 5px 0px 10px rgba(0, 0, 0, .8));
+   
 } 
+span {
+    overflow: hidden;
+}
+img {
+    width: 100%;
+    margin:0px;
+    overflow: hidden;
+}
 input {
+    /* display: none; */
+   
     border:none;
     background:none;
-    outline:none;
-    width: 200px;
-    display: flex;
+ 
+    width: 200px; 
+   display: flex; 
     padding:0;
     font-weight:lighter;
     font-family: 'Ubundu', sans-serif;
-    font-size: 40px;
+    font-size: 18px;
     color: #fffbfb;
-    filter: drop-shadow( 2px 2px 2px rgba(0, 0, 0, .5));
+    
 }
 button {
     border:none;
@@ -73,31 +83,23 @@ button {
 }
 
 .container {
-    /* display: flex; */
-    width: 100%;
-   padding: 20px 80px;
-   /* padding-right: 80px;
-   padding-bottom: 20px;
-   padding-top: 20px; */
-   /* align-items:center;
-   justify-content: space-between; */
-    /* margin: 0 auto; */
-}
+   width: 100%;
+   padding:10px 80px;
+  }
+
 .header__inner {
     width: 100%;
-    display: inline-flex;
+    display:inline-flex;
     justify-content:space-between;
-    color: #ffffff;
-    /* padding-top: 15px; */
     align-items:center;
-    /* flex-wrap: wrap; */
 }
 
 .header__logo {
-    display: inline-flex;
-    height: 33px;
-    width: 200px;
-    align-items:center;
+    fill: #ffffff;
+    display: flex;
+    height: 30px;
+    width: 180px;
+  
 }
 .containerOrder{
     display: flex;
@@ -306,30 +308,7 @@ button {
   filter: drop-shadow( 2px 2px 2px rgba(0, 0, 0, .5));
 }
 
-.test1 {
-    position:relative;
-    /* display: flex; */
-    fill: rgb(225, 29, 29);
-    /* width:100%; */
-    height: 204px;
-    /* margin-bottom: 25px;
-    justify-content: center;
-    */
-}
 
-.test2 {
-    position:relative;
-    /* display: flex; */
-    fill: rgb(14, 10, 241);
-    /* width:100%; */
-    height: 200px;
-    /* width: 200px; */
-    top: 38px;
-    right:120px;
-    /* margin-bottom: 25px;
-    justify-content: center;
-    */
-}
 
 
 .icon:hover{
@@ -358,7 +337,19 @@ button {
         transform:rotate(360deg);
     }
 }
-
+.loadImg {
+    /* display: none; */
+    
+    /* width: 10%; */
+    overflow: hidden;
+    /* position: absolute;
+    z-index: 2100; */
+}
+.loadImg.active{
+    border-bottom: 3px solid #ffffff;
+    border-top: 3px solid #ffffff;
+    filter: drop-shadow( 5px 0px 10px rgba(0, 0, 0, .8));
+}
 /*intro
 =================*/
 
@@ -366,32 +357,46 @@ button {
      position: absolute;
 }
 .textColor {
-    width: 100px;
-    display: flex;
-    padding-left:80px;
+    position: absolute;
+    z-index: 2000;
+    width: 50px;
+    margin-left:110px;
+    margin-top:30px;
     font-weight:lighter;
     font-family: 'Ubundu', sans-serif;
-    font-size: 20px;
+    font-size:25px;
     color: #fffbfb;
     filter: drop-shadow( 2px 2px 2px rgba(0, 0, 0, .5));
-    display: flex;
-    width: 150px;
-   
-   
+    cursor:copy;
 }
+
+
 .copied {
     font-size: 25px;
     position: absolute;
     z-index: 1000;
     filter: drop-shadow( 2px 2px 2px rgba(0, 0, 0, .5));
 }
+#tooltip {
+    z-index: 9999;
+	position: absolute;
+	display: none;
+	top:0px;
+	left:0px;
+	background-color: #000;
+	padding: 5px 10px 5px 10px;
+	color: white;
+	opacity: 0.6;
+	border-radius: 5px; 
+}
+
 .textColorHide {
     display: none;
 }
 .intro {
     display:flex; 
      width: 100%;
-     padding-bottom:79px;
+     /* padding-bottom:79px; */
      height: 100vh;
      }
 
@@ -419,24 +424,35 @@ button {
     flex-grow:7.8;
 }
 .color2 {
+    height: 35.4px;
     flex-grow: 35.4;
+   
 }
 .color3 {
+    height: 5.7px;
     flex-grow:5.7;
+    
 }
 .color4 {
+    height:2.3px;
     flex-grow:2.3;
+   
 }
 .color5 {
+    height:19px;
     flex-grow:19;
+   
 }
 .color6 {
+    height:9.1px;
     flex-grow:9.1;
 }
 .color7 {
+    height:4.4px;
     flex-grow:4.4;
 }
 .color8 {
+    height:15px;
     flex-grow:15;
    
 }
