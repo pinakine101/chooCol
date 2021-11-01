@@ -133,30 +133,20 @@ document.addEventListener('DOMContentLoaded', () => {
 				};
 				// $(tabsContent).children(spanActive).addClass('active')
 				target.classList.add('active');
+
 				if(target.classList.contains('loadImg')){
 					target.parentNode.classList.add('active')
 				}
-				else{target.parentNode.classList.remove('active')}
-				// let imgActive = spanActive.querySelector('.loadImg');
-				
-				// activeImg.classList.add('active');
-
-				// $(spanActive).children().classList.add('active');
-				
-				// let imgActive = spanActive.querySelector('.loadImg');
-				
-
-				// if(!imgActive.classList.contains('active')){
-				// 	$(tabsContent).children().removeClass('active');
-				// 	imgActive.classList.add('active');
-				// };
+				else{target.parentNode.classList.remove('active');
+				// !target.classList.remove('active')
+			}
 			
 				textColor.classList.add('textColor'); // показываем контейнер с именем цвета, добовляем *active,
 				
 				findColorName(); //вызываем имя цвета
 				textColor.innerHTML = textColorBuffer;//  добавляем имя цвета
 				target.append(textColor);  //добовляем контейнер с именем цвета
-				console.log(activeImg)
+			
 				// description.innerHTML = `<input type='text'	id = "description" value = "description"></input>`;
 				
 				editButtns[0].removeEventListener('click', calcCouPlus);//удаляем пребор гаммы в "+" без *span.active*  
@@ -303,11 +293,15 @@ document.addEventListener('DOMContentLoaded', () => {
 			tabsContent.forEach((i) => {
 				i.classList.toggle('row');
 				if (i.classList.contains('row')) {
-					axisSort = 'x'
+					axisSort = 'x';
+					$(i).children('span').css('height', '100%');
+					$(textColor).css('margin-left','10px');
 				} else {
-					axisSort = 'y'
+					axisSort = 'y';
+					$(i).children('span').css('height', '');
+					$(textColor).css('margin-left','100px');
 				};
-				console.log(axisSort);
+				
 			});
 		});
 		
@@ -856,9 +850,9 @@ $("[data-tooltip]").mousemove(function (eventObject) {
 						
 						console.log('left')
 					} else if(result[2] > 10) {
-						// counterMinus(spaRoomColor1);
-						$('span.active').css('backgroundColor', 
-						`hsl(${+ result[0]}, ${+ result[1] }%, ${ + result[2] - 5 }%)`);
+						counterMinus(arrayHueMain);
+						// $('span.active').css('backgroundColor', 
+						// `hsl(${+ result[0]}, ${+ result[1] }%, ${ + result[2] - 5 }%)`);
 							
 							console.log('right')
 					}
