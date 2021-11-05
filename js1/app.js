@@ -345,7 +345,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			
 		};
 
-		counterPlus(arrStyleColor);
+		// counterPlus(arrStyleColor);
 		
 	
 		if(tabsContent[0].getAttribute('id') == 'sleepRoom'){
