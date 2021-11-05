@@ -226,7 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			separateGamms ();
 			shuffleArray(arrStyleColor);
 			shuffleArray(arrayHueSleep);
-			shuffleArray(arraySaturSleep);
+			// shuffleArray(arraySaturSleep);
 	
 		});
 		
