@@ -127,19 +127,22 @@ document.addEventListener('DOMContentLoaded', () => {
 				let activeImg = $(target).children('img');
 				//если клик не на *span.active* убираем класс *active, скрываем контейнер с именем цвета
 				if (!target.classList.contains("active")) {
+					target.classList.remove("active")
+					$(spanActive).removeClass('active');
 					$(tabsContent).children().removeClass('active');
-				
+					target.parentNode.classList.remove('active')
 					textColor.classList.remove('textColor');
 				};
 				// $(tabsContent).children(spanActive).addClass('active')
 				target.classList.add('active');
 
 				if(target.classList.contains('loadImg')){
+					$('.loadImg').removeClass('active');
 					target.parentNode.classList.add('active')
 				}
-				else{target.parentNode.classList.remove('active');
-				// !target.classList.remove('active')
-			}
+				// else{target.classList.remove('active');
+				// target.classList.remove('active')
+				// 	}
 			
 				textColor.classList.add('textColor'); // показываем контейнер с именем цвета, добовляем *active,
 				
