@@ -133,17 +133,14 @@ document.addEventListener('DOMContentLoaded', () => {
 					target.parentNode.classList.remove('active')
 					textColor.classList.remove('textColor');
 				};
-				// $(tabsContent).children(spanActive).addClass('active')
+				
 				target.classList.add('active');
 
 				if(target.classList.contains('loadImg')){
 					$('.loadImg').removeClass('active');
 					target.parentNode.classList.add('active')
 				}
-				// else{target.classList.remove('active');
-				// target.classList.remove('active')
-				// 	}
-			
+							
 				textColor.classList.add('textColor'); // показываем контейнер с именем цвета, добовляем *active,
 				
 				findColorName(); //вызываем имя цвета
@@ -173,6 +170,8 @@ document.addEventListener('DOMContentLoaded', () => {
 					editButtns[0].removeEventListener('click', actCalcCouPus); //удаляем оброботчики перебора гаммы в режиме БЕЗ *span.active*
 					editButtns[1].removeEventListener('click', actCalcCouMinus);
 					window.addEventListener('mousemove', sorTable); //включаем возможность перетаскивания блоков
+					// $('.loadImg').removeClass('active');
+					target.parentNode.classList.remove('active')
 	
 					// оповещение о копировании имени цвета
 					
@@ -294,13 +293,20 @@ document.addEventListener('DOMContentLoaded', () => {
 		editButtns[4].addEventListener('click', () => {
 			editButtns[4].classList.toggle('buttRotate90');
 			tabsContent.forEach((i) => {
-				i.classList.toggle('row');
-				if (i.classList.contains('row')) {
+				i.classList.toggle('intro_1_row');
+				if (i.classList.contains('intro_1_row')) {
 					axisSort = 'x';
-					$(i).children('span').css('height', '100%');
+					$('span').css('height', 'auto', 'overflow-y', 'hidden');
+					$('.color2').css( 'width', '35.4%', 'overflow-x', 'hidden');
+					$('.color6').css( 'width', '9.1%', 'overflow-x', 'hidden');
+					$('.color5').css( 'width', '19%', 'overflow-x', 'hidden');
+					$('.loadImg').css( 'width', '100vw', ' height', '100vw' );
+					
 					$(textColor).css('margin-left','10px');
 				} else {
 					axisSort = 'y';
+					$('span').css('width', 'auto', 'overflow-x', 'hidden');
+					
 					$(i).children('span').css('height', '');
 					$(textColor).css('margin-left','100px');
 				};
