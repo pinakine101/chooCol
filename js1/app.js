@@ -843,7 +843,7 @@ $("[data-tooltip]").mousemove(function (eventObject) {
 				
 				if (xAbs > yAbs) {
 					if (clickEndX < clickStartX && result[2] < 95 ) {
-						// counterPlus(spaRoomColor1);
+						counterPlus(spaRoomColor1);
 						
 						$('span.active').css('backgroundColor', 
 						`hsl(${+ result[0]}, ${+ result[1]}%, ${ + result[2] +5 }%)`);
