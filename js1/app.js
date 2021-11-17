@@ -57,16 +57,13 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 	let arrayHueSleep = [	150, 190, 210, 190,  70, 48, 70, 180 ];
 	let arraySaturSleep = [ 20, 55, 50, 50 , 70, 20, 10, 5 ];
-	let arrayLightSleep =[ 95, 92,	79,	46, 43,	43,	79,	92 ];
-	
+	let arrayLightSleep =[ 95, 92,	79,	46, 43,	22,	14,	9  ];
 	
 	let arrayHueGost = [ 15, 27, 15, 94, 48, 43, 38, 48];
 	let arraySaturGost = [	20, 85,50, 10 ,50, 20, 50, 50 ];
 	
-	
 	let arrayHueKitch = [	350, 15, 350, 58, 15, 94, 27, 15 ];
 	let arraySaturKitch = [	100, 5, 20, 10,  20, 15, 60, 50 ];
-	
 	
 	let arrayHueKids = [	 22, 48, 43, 94,  159,  48, 48, 353,  ];
 	let arraySaturKids = [	100, 100, 100, 70,  80, 80, 100, 80 ];
@@ -81,30 +78,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	let arrayLightHoll =[ 95, 92, 97,	46, 79,	79,	28,	4 ];
 	
 	// sliceColor()
-		// let  newArrLight = arrayLight.map(function(item){
-		// 	// sliceColor(spanActive);
-		// 	let delta;
-		// 	if(result[2]<= 100 && result[2] > 97){item[i] = 100 - (result[2])}
-		// 	else if(result[2] <= 13 && result[2] >= 0) {item[i]= 0}
+	
 		
-		// 	else if(result[2] <= item[0]  && result[2] >=  item[1])   {item[0] -(result[2]/8)}
-		// 	else if(result[2] <= item[1]  && result[2] >=  item[2])   {item[1] -(result[2]/8)}
-		// 	else if(result[2] <= item[2]  && result[2] >=  item[3])   {item[2] -(result[2]/8)}
-		// 	else if(result[2] <= item[3]  && result[2] >=  item[4])   {item[3] -(result[2]/8)}
-		// 	else if(result[2] <= item[4]  && result[2] >=  item[5])   {item[4] -(result[2]/8)}
-		// 	else if(result[2] <= item[5]  && result[2] >=  item[6])   {item[5] -(result[2]/8)}
-		// 	else if(result[2] <= item[6]  && result[2] >=  item[7])   {item[6] -(result[2]/8)}
-		// 	else if(result[2] <= item[7]  && result[2] >=  item[0])   {item[7] -(result[2]/8)}
-			
-		// return item - 5;
-		// });
-		
-	
-		// let newArrHue= arrayHueMain.map((item)=>{
-		// 	return item + (result[0])
-		// });
-	
-	
 	
 		//______Active Color_________//
 	
@@ -212,6 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			counterMinus(arrStyleColor);
 			separateGamms ();
 			
+			
 		}
 		//_______Buttuns_______///
 	
@@ -223,9 +199,8 @@ document.addEventListener('DOMContentLoaded', () => {
 			})
 	
 		icon.addEventListener('click', () => {
-			separateGamms ();
-			shuffleArray(arrStyleColor);
-			shuffleArray(arrayHueSleep);
+		
+			// shuffleArray(arrayHueSleep);
 			// shuffleArray(arraySaturSleep);
 	
 		});
@@ -325,12 +300,10 @@ document.addEventListener('DOMContentLoaded', () => {
 			tabsBtn[i].classList.add('active');
 			
 		};
-		// coloring();
+	
 		hideTabContent();
 		showTabsContent(0);
-		// actColorCalc(color1, arrayHue, arraySaturSleep, arrayLight, counterPlus)
-	// // 
-	
+		
 		function clickTabsBtn(event){
 			
 			let target = event.target;
@@ -352,8 +325,6 @@ document.addEventListener('DOMContentLoaded', () => {
 			correctGamma( arrayHueSleep, arraySaturSleep, arrayLightSleep) };	
 	
 		$(tabsBtn).on('click',  clickTabsBtn);
-	
-		
 	
 		function separateGamms (){
 	
@@ -484,6 +455,8 @@ $("[data-tooltip]").mousemove(function (eventObject) {
 		function correctGamma(gammaHue, gammaSat, gammaLight ) {
 		
 						tabsContent.forEach((item, i)=>{
+
+							sliceColor();
 							
 						if(tabsBtn[i].classList.contains('active')){
 						
@@ -580,6 +553,42 @@ $("[data-tooltip]").mousemove(function (eventObject) {
 	
 						   if(gammaLight[i] == 100){$(tabsContent).children(item).css("background", `hsl(${gammaLight[i]}, ${50}%, ${ gammaLight [i]-11}%)`)}
 						else if(gammaLight[i] == 0){$(tabsContent).children(item).css("background", `hsl(${gammaLight[i]}, ${50}%, ${ gammaLight [i]+11}%)`)}
+
+						gammaLight.map(function(item){
+			
+							let delta = 100 - result[2] ;
+							if(result[2]<= 100 && result[2] > 97){item[i] = 100 - (result[2])}
+							else if(result[2] <= 13 && result[2] >= 0) {item[i]= 0}
+						
+							else if(result[2] <= item[0]  && result[2] >=  item[1])   {item[0] - delta}
+							else if(result[2] <= item[1]  && result[2] >=  item[2])   {item[1] - delta}
+							else if(result[2] <= item[2]  && result[2] >=  item[3])   {item[2] - delta}
+							else if(result[2] <= item[3]  && result[2] >=  item[4])   {item[3] - delta}
+							else if(result[2] <= item[4]  && result[2] >=  item[5])   {item[4] - delta}
+							else if(result[2] <= item[5]  && result[2] >=  item[6])   {item[5] - delta}
+							else if(result[2] <= item[6]  && result[2] >=  item[7])   {item[6] - delta}
+							else if(result[2] <= item[7]  && result[2] >=  item[0])   {item[7] - delta}
+							
+						return item ;
+						});
+				
+						gammaSat.map(function(item){
+							
+							let delta = 100 - result[1];
+							if(result[1]<= 100 && result[1] > 97){item[i] = 100 - (result[2])}
+							else if(result[1] <= 13 && result[1] >= 0) {item[i]= 0}
+						
+							else if(result[2] <= item[0]  && result[2] >=  item[1])   {item[0] -delta}
+							else if(result[2] <= item[1]  && result[2] >=  item[2])   {item[1] -delta}
+							else if(result[2] <= item[2]  && result[2] >=  item[3])   {item[2] -delta}
+							else if(result[2] <= item[3]  && result[2] >=  item[4])   {item[3] -delta}
+							else if(result[2] <= item[4]  && result[2] >=  item[5])   {item[4] -delta}
+							else if(result[2] <= item[5]  && result[2] >=  item[6])   {item[5] -delta}
+							else if(result[2] <= item[6]  && result[2] >=  item[7])   {item[6] -delta}
+							else if(result[2] <= item[7]  && result[2] >=  item[0])   {item[7] -delta}
+							
+						return item ;
+						});
 				};
 			
 				$('span.active').css('backgroundColor', `hsl(${result[0]}, ${result[1]}%, ${result[2]}%)`);
@@ -842,17 +851,17 @@ $("[data-tooltip]").mousemove(function (eventObject) {
 			if (xAbs >10 || yAbs > 10) {
 				
 				if (xAbs > yAbs) {
-					if (clickEndX < clickStartX && result[2] < 95 ) {
-						counterPlus(spaRoomColor1);
+					if (clickEndX < clickStartX ) {
+						counterPlus(arrayLight);
 						
 						$('span.active').css('backgroundColor', 
-						`hsl(${+ result[0]}, ${+ result[1]}%, ${ + result[2] +5 }%)`);
+						`hsl(${arrayHueSleep[cou1]}, ${arraySaturSleep[cou1]}%, ${ arrayLightSleep[cou1]}%)`);
 						
 						console.log('left')
-					} else if(result[2] > 10) {
-						counterMinus(arrayHueMain);
-						// $('span.active').css('backgroundColor', 
-						// `hsl(${+ result[0]}, ${+ result[1] }%, ${ + result[2] - 5 }%)`);
+					} else  {
+						counterMinus(arrayLight);
+						$('span.active').css('backgroundColor', 
+						`hsl(${arrayHueSleep[cou1]}, ${arraySaturSleep[cou1]}%, ${ arrayLightSleep[cou1]}%)`);
 							
 							console.log('right')
 					}

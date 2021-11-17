@@ -356,7 +356,7 @@ button {
 .textColor {
     /* position: absolute;
     z-index: 800; */
-    /* width: 50px; */
+    width: 50px;
     margin-left:110px;
     /* margin-top:5px; */
     font-weight:lighter;
