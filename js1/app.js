@@ -80,6 +80,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	let arrayHueHoll = [	 15, 27, 15, 94, 48, 43, 38, 48  ];
 	let arraySaturHoll = [	10, 25, 20, 5,  0, 5, 5, 5 ];
 	let arrayLightHoll =[ 95, 92, 97,	46, 79,	79,	28,	4 ];
+
+
 	
 	sliceColor();
 		
@@ -341,18 +343,20 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 
 		counterPlus(arrStyleColor);
-		
+		// correctGamma( arrayHueSleep, arraySaturSleep, arrayLightSleep);
 	
-		if(tabsContent[0].getAttribute('id') == 'sleepRoom'){
-			correctGamma( arrayHueSleep, arraySaturSleep, arrayLightSleep); }	
+		// if(tabsContent[0].getAttribute('id') == 'sleepRoom'){
+		// 	correctGamma( arrayHueSleep, arraySaturSleep, newArrLight); 
+		// }	
 		$(tabsBtn).on('click',  clickTabsBtn);
 	
-		
-	
+		// correctGamma ( arrayHueSleep, arraySaturSleep,  newArrLight);
+		// console.log(newArrLight)
+		separateGamms ()
 		function separateGamms (){
 	
 			if(tabsBtn[0].classList.contains('active')){
-				correctGamma ( arrayHueSleep, arraySaturSleep,  arrayLightSleep);
+				correctGamma ( arrayHueSleep, arraySaturSleep,  newArrLight);
 							}		
 				else if(tabsBtn[1].classList.contains('active')){
 					correctGamma(arrayHueGost, arraySaturGost,  arrayLight);
@@ -475,43 +479,50 @@ $("[data-tooltip]").mousemove(function (eventObject) {
 			
 		}
 		
-		let  newArrLight = arrayLight.map(function(item){
-			// sliceColor(spanActive);
-			let delta;
-			if(result[2]<= 100 && result[2] > 97){item[i] = 100 - (result[2])}
-			else if(result[2] <= 13 && result[2] >= 0) {item[i]= 0}
+		// let  newArrLight = arrayLight.map(function(item){
+		// 	// sliceColor(spanActive);
+		// 	let delta;
+		// 	if(result[2]<= 100 && result[2] > 97){item[i] = 100 - (result[2])}
+		// 	else if(result[2] <= 13 && result[2] >= 0) {item[i]= 0}
 		
-			else if(result[2] <= item[0]  && result[2] >=  item[1])   {item[0] -(result[2]/8)}
-			else if(result[2] <= item[1]  && result[2] >=  item[2])   {item[1] -(result[2]/8)}
-			else if(result[2] <= item[2]  && result[2] >=  item[3])   {item[2] -(result[2]/8)}
-			else if(result[2] <= item[3]  && result[2] >=  item[4])   {item[3] -(result[2]/8)}
-			else if(result[2] <= item[4]  && result[2] >=  item[5])   {item[4] -(result[2]/8)}
-			else if(result[2] <= item[5]  && result[2] >=  item[6])   {item[5] -(result[2]/8)}
-			else if(result[2] <= item[6]  && result[2] >=  item[7])   {item[6] -(result[2]/8)}
-			else if(result[2] <= item[7]  && result[2] >=  item[0])   {item[7] -(result[2]/8)}
+		// 	else if(result[2] <= item[0]  && result[2] >=  item[1])   {item[0] -(result[2]/8)}
+		// 	else if(result[2] <= item[1]  && result[2] >=  item[2])   {item[1] -(result[2]/8)}
+		// 	else if(result[2] <= item[2]  && result[2] >=  item[3])   {item[2] -(result[2]/8)}
+		// 	else if(result[2] <= item[3]  && result[2] >=  item[4])   {item[3] -(result[2]/8)}
+		// 	else if(result[2] <= item[4]  && result[2] >=  item[5])   {item[4] -(result[2]/8)}
+		// 	else if(result[2] <= item[5]  && result[2] >=  item[6])   {item[5] -(result[2]/8)}
+		// 	else if(result[2] <= item[6]  && result[2] >=  item[7])   {item[6] -(result[2]/8)}
+		// 	else if(result[2] <= item[7]  && result[2] >=  item[0])   {item[7] -(result[2]/8)}
 			
-		return item - 5;
-		});
+		// return item - 5;
+		// });
 		
 	
-		let newArrHue= arrayHueMain.map((item)=>{
-			return item + (result[0])
+		// let newArrHue= arrayHueMain.map((item)=>{
+		// 	return item + (result[0])
+		// });
+		
+		let  newArrLight = arrayLightSleep.map(function(item, i){
+										
+			if(result[2]<= 100 && result[2] > 97){item [i]= 100 - (result[2])}
+			else if(result[2] <= 13 && result[2] >= 0) {item [i] = 0}
+			return item - result[2];
+			
 		});
-	
+
 
 		function correctGamma(gammaHue, gammaSat, gammaLight ) {
-			let  newArrLight = gammaLight.map(function(item){
-				result[2] = gammaLight[cou6];
-				if(result[2]<= 100 && result[2] > 97){item[i] = 100 - (result[2])}
-			    else if(result[2] <= 13 && result[2] >= 0) {item[i]= 0}
-				return item - result[2];
-
-			})
+			
 						tabsContent.forEach((item, i)=>{
+							
+
+						
+		
+							
 							
 						if(tabsBtn[i].classList.contains('active')){
 						
-							   if( gammaHue[cou1] >= 0  && gammaHue[cou1] <=360)  
+							   if( gammaHue[cou1] >= 0  && gammaHue[cou1] <=22)  
 						{$( tabsContent [i] ).children(arrStyleColor[0]).css("background",
 						 `hsl(${ gammaHue[cou1]}, ${ + gammaSat[cou1]}%, ${  newArrLight [0]  }%)`);
 						 $( tabsContent [i] ).children(arrStyleColor[1]).css("background", 
@@ -529,150 +540,150 @@ $("[data-tooltip]").mousemove(function (eventObject) {
 						 $( tabsContent [i] ).children(arrStyleColor[7]).css("background", 
 						 `hsl(${ gammaHue[cou8]}, ${ + gammaSat[cou8]}%, ${  newArrLight [7]    }%)`);
 						}
-					// 	else if( gammaHue[cou1] >= 23  && gammaHue[cou1] <= 48)  
-					//    {$( tabsContent [i]).children(arrStyleColor[0]).css("background", 
-					//    `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou1]     }%, ${  gammaLight [0] -1 }%)`);
-					// 	$( tabsContent [i]).children(arrStyleColor[1]).css("background",
-					// 	 `hsl(${gammaHue[cou2]}, ${ + gammaSat[cou2]     }%, ${  gammaLight [1]  -2}%)`);
-					// 	$( tabsContent [i]).children(arrStyleColor[2]).css("background",
-					// 	 `hsl(${gammaHue[cou3]}, ${ + gammaSat[cou3]     }%, ${  gammaLight [2] -3 }%)`);
-					// 	$( tabsContent [i]).children(arrStyleColor[3]).css("background", 
-					// 	`hsl(${gammaHue[cou4]}, ${ + gammaSat[cou4] +10 }%, ${  gammaLight [3] +10 }%)`);
-					// 	$( tabsContent [i]).children(arrStyleColor[4]).css("background",
-					// 	 `hsl(${gammaHue[cou5]}, ${ + gammaSat[cou5]     }%, ${  gammaLight [4] -7 }%)`);
-					// 	$( tabsContent [i]).children(arrStyleColor[5]).css("background", 
-					// 	`hsl(${gammaHue[cou6]}, ${ + gammaSat[cou6]     }%, ${  gammaLight [5] }%)`);
-					// 	$( tabsContent [i]).children(arrStyleColor[6]).css("background", 
-					// 	`hsl(${gammaHue[cou7]}, ${ + gammaSat[cou7]     }%, ${  gammaLight [6]  }%)`);
-					// 	$( tabsContent [i]).children(arrStyleColor[7]).css("background", 
-					// 	`hsl(${gammaHue[cou8]}, ${ + gammaSat[cou8] +30 }%, ${  gammaLight [7]   }%)`);
-					// 	}
-					// 	else if( gammaHue[cou1] >= 49  && gammaHue[cou1] <= 93) 
-					//    {$( tabsContent [i] ).children(arrStyleColor[0]).css("background", 
-					//    `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou1]     }%, ${  gammaLight [0] }%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[1]).css("background",
-					// 	 `hsl(${gammaHue[cou2]}, ${ + gammaSat[cou2]     }%, ${  gammaLight [1] }%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[2]).css("background", 
-					// 	`hsl(${gammaHue[cou3]}, ${ + gammaSat[cou3]     }%, ${  gammaLight [2] }%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[3]).css("background", 
-					// 	`hsl(${gammaHue[cou4]}, ${ + gammaSat[cou4] +35 }%, ${ +gammaLight [3] }%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[4]).css("background",
-					// 	 `hsl(${gammaHue[cou5]}, ${ + gammaSat[cou5] +5  }%, ${  gammaLight [4]}%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[5]).css("background",
-					// 	 `hsl(${gammaHue[cou6]}, ${ + gammaSat[cou6] +30 }%, ${  gammaLight [5] }%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[6]).css("background",
-					// 	 `hsl(${gammaHue[cou7]}, ${ + gammaSat[cou7] +5  }%, ${  gammaLight [6] }%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[7]).css("background", 
-					// 	`hsl(${gammaHue[cou8]}, ${ + gammaSat[cou8] +10 }%, ${  gammaLight [7]  }%)`);
-					// 	}
-					// 	else if(gammaHue[cou1] >= 94 && gammaHue[cou1] <= 158) 
-					//    {$( tabsContent [i] ).children(arrStyleColor[0]).css("background",
-					//     `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou1]     }%, ${  gammaLight [0] -1}%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[1]).css("background", 
-					// 	`hsl(${gammaHue[cou2]}, ${ + gammaSat[cou2]     }%, ${  gammaLight [1] -2}%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[2]).css("background", 
-					// 	`hsl(${gammaHue[cou3]}, ${ + gammaSat[cou3]     }%, ${  gammaLight [2] -5}%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[3]).css("background", 
-					// 	`hsl(${gammaHue[cou4]}, ${ + gammaSat[cou4] +20 }%, ${  gammaLight [3] }%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[4]).css("background", 
-					// 	`hsl(${gammaHue[cou5]}, ${ + gammaSat[cou5]     }%, ${  gammaLight [4] -7}%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[5]).css("background", 
-					// 	`hsl(${gammaHue[cou6]}, ${ + gammaSat[cou6]     }%, ${  gammaLight [5] }%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[6]).css("background", 
-					// 	`hsl(${gammaHue[cou7]}, ${ + gammaSat[cou7]     }%, ${  gammaLight [6] }%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[7]).css("background", 
-					// 	`hsl(${gammaHue[cou8]}, ${ + gammaSat[cou8]     }%, ${  gammaLight [7]  }%)`);
-					//    } 
-					// 	else if( gammaHue[cou1] >= 159 && gammaHue[cou1] <= 199) 
-					//    {$( tabsContent [i] ).children(arrStyleColor[0]).css("background",
-					//    `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou1]     }%, ${ gammaLight [0] -7 }%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[1]).css("background",
-					// 	 `hsl(${gammaHue[cou2]}, ${ + gammaSat[cou2]     }%, ${  gammaLight [1] -8 }%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[2]).css("background", 
-					// 	`hsl(${gammaHue[cou3]}, ${ + gammaSat[cou3]     }%, ${  gammaLight [2] -10}%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[3]).css("background", 
-					// 	`hsl(${gammaHue[cou4]}, ${ + gammaSat[cou4] +10 }%, ${  gammaLight [3] }%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[4]).css("background", 
-					// 	`hsl(${gammaHue[cou5]}, ${ + gammaSat[cou5] +10 }%, ${  gammaLight [4] -5}%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[5]).css("background", 
-					// 	`hsl(${gammaHue[cou6]}, ${ + gammaSat[cou6] +10 }%, ${  gammaLight [5] }%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[6]).css("background",
-					// 	 `hsl(${gammaHue[cou7]}, ${ + gammaSat[cou7] +20 }%, ${  gammaLight [6] }%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[7]).css("background", 
-					// 	`hsl(${gammaHue[cou8]}, ${ + gammaSat[cou8] +20 }%, ${  gammaLight [7]  }%)`);
-					//    }
-					// 	else if( gammaHue[cou1] >= 200 && gammaHue[cou1] <= 241) 
-					//    {$( tabsContent [i] ).children(arrStyleColor[0]).css("background", 
-					//    `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou1] +30 }%, ${  gammaLight [0] -4 }%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[1]).css("background", 
-					// 	`hsl(${gammaHue[cou2]}, ${ + gammaSat[cou2] +50 }%, ${  gammaLight [1]-3  }%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[2]).css("background",
-					// 	 `hsl(${gammaHue[cou3]}, ${ + gammaSat[cou3] +70 }%, ${  gammaLight [2]-3  }%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[3]).css("background",
-					// 	 `hsl(${gammaHue[cou4]}, ${ + gammaSat[cou4] +20 }%, ${  gammaLight [3] +8 }%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[4]).css("background",
-					// 	 `hsl(${gammaHue[cou5]}, ${ + gammaSat[cou5]     }%, ${  gammaLight [4] +1}%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[5]).css("background",
-					// 	 `hsl(${gammaHue[cou6]}, ${ + gammaSat[cou6] +5  }%, ${  gammaLight [5] +5 }%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[6]).css("background", 
-					// 	`hsl(${gammaHue[cou7]}, ${ + gammaSat[cou7] +10 }%, ${  gammaLight [6] +5 }%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[7]).css("background", 
-					// 	`hsl(${gammaHue[cou8]}, ${ + gammaSat[cou8] +20 }%, ${  gammaLight [7] +5  }%)`);
-					//    }
-					// 	else if( gammaHue[cou1] >= 242 && gammaHue[cou1] <= 280) 
-					//    {$( tabsContent [i] ).children(arrStyleColor[0]).css("background", 
-					//    `hsl(${gammaHue[cou1]}, ${+ gammaSat[cou1] +20  }%, ${  gammaLight [0] -1}%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[1]).css("background", 
-					// 	`hsl(${gammaHue[cou2]}, ${+ gammaSat[cou2] +20  }%, ${  gammaLight [1] }%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[2]).css("background", 
-					// 	`hsl(${gammaHue[cou3]}, ${+ gammaSat[cou3] +30  }%, ${  gammaLight [2] +4}%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[3]).css("background", 
-					// 	`hsl(${gammaHue[cou4]}, ${+ gammaSat[cou4] +30  }%, ${  gammaLight [3] +25}%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[4]).css("background", 
-					// 	`hsl(${gammaHue[cou5]}, ${+ gammaSat[cou5] +30  }%, ${  gammaLight [4] +20 }%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[5]).css("background",
-					// 	 `hsl(${gammaHue[cou6]}, ${+ gammaSat[cou6] +30  }%, ${  gammaLight [5] +18}%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[6]).css("background", 
-					// 	`hsl(${gammaHue[cou7]}, ${+ gammaSat[cou7] +30  }%, ${  gammaLight [6] +15}%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[7]).css("background", 
-					// 	`hsl(${gammaHue[cou8]}, ${+ gammaSat[cou8] +30  }%, ${  gammaLight [7] +12 }%)`);
-					//    }
-					// 	else if( gammaHue[cou1] >= 281 && gammaHue[cou1] <= 352) 
-					//    {$( tabsContent [i] ).children(arrStyleColor[0]).css("background",
-					//     `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou1]     }%, ${  gammaLight [0] -1 }%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[1]).css("background",
-					// 	 `hsl(${gammaHue[cou2]}, ${ + gammaSat[cou2]     }%, ${  gammaLight [1]  }%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[2]).css("background",
-					// 	 `hsl(${gammaHue[cou3]}, ${ + gammaSat[cou3] +10 }%, ${  gammaLight [2]  }%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[3]).css("background",
-					// 	 `hsl(${gammaHue[cou4]}, ${ + gammaSat[cou4] +10 }%, ${  gammaLight [3] +5 }%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[4]).css("background", 
-					// 	`hsl(${gammaHue[cou5]}, ${ + gammaSat[cou5]     }%, ${  gammaLight [4]  }%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[5]).css("background", 
-					// 	`hsl(${gammaHue[cou6]}, ${ + gammaSat[cou6]     }%, ${  gammaLight [5] +6}%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[6]).css("background", 
-					// 	`hsl(${gammaHue[cou7]}, ${ + gammaSat[cou7]     }%, ${  gammaLight [6] +6 }%)`);
-					// 	$( tabsContent [i] ).children(arrStyleColor[7]).css("background", 
-					// 	`hsl(${gammaHue[cou8]}, ${ + gammaSat[cou8] -5  }%, ${  gammaLight [7] +5  }%)`);
-					//    }
-					// 	else if(gammaHue[cou1] >= 353  && gammaHue[cou1] <= 360)  
-					// 	{$( tabsContent [i]).children(arrStyleColor[0]).css("background",
-					// 	 `hsl(${gammaHue[cou1]}, ${gammaSat[cou1]     }%, ${  gammaLight [0]  }%)`);
-					// 	 $( tabsContent [i]).children(arrStyleColor[1]).css("background",
-					// 	  `hsl(${gammaHue[cou2]}, ${gammaSat[cou2]     }%, ${  gammaLight [1]  }%)`);
-					// 	 $( tabsContent [i]).children(arrStyleColor[2]).css("background",
-					// 	  `hsl(${gammaHue[cou3]}, ${gammaSat[cou3]     }%, ${  gammaLight [2]  }%)`);
-					// 	 $( tabsContent [i]).children(arrStyleColor[3]).css("background",
-					// 	  `hsl(${gammaHue[cou4]}, ${gammaSat[cou4]     }%, ${  gammaLight [3] +18 }%)`);
-					// 	 $( tabsContent [i]).children(arrStyleColor[4]).css("background",
-					// 	  `hsl(${gammaHue[cou5]}, ${gammaSat[cou5]     }%, ${  gammaLight [4] +5 }%)`);
-					// 	 $( tabsContent [i]).children(arrStyleColor[5]).css("background",
-					// 	  `hsl(${gammaHue[cou6]}, ${gammaSat[cou6]     }%, ${  gammaLight [5]  }%)`);
-					// 	 $( tabsContent [i]).children(arrStyleColor[6]).css("background",
-					// 	  `hsl(${gammaHue[cou7]}, ${gammaSat[cou7]     }%, ${  gammaLight [6]  }%)`);
-					// 	 $( tabsContent [i]).children(arrStyleColor[7]).css("background",
-					// 	 `hsl(${gammaHue[cou8]}, ${gammaSat[cou8]     }%, ${  gammaLight [7]   }%)`);
-					// 	}
+						else if( gammaHue[cou1] >= 23  && gammaHue[cou1] <= 48)  
+					   {$( tabsContent [i]).children(arrStyleColor[0]).css("background", 
+					   `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou1]     }%, ${  gammaLight [0] -1 }%)`);
+						$( tabsContent [i]).children(arrStyleColor[1]).css("background",
+						 `hsl(${gammaHue[cou2]}, ${ + gammaSat[cou2]     }%, ${  gammaLight [1]  -2}%)`);
+						$( tabsContent [i]).children(arrStyleColor[2]).css("background",
+						 `hsl(${gammaHue[cou3]}, ${ + gammaSat[cou3]     }%, ${  gammaLight [2] -3 }%)`);
+						$( tabsContent [i]).children(arrStyleColor[3]).css("background", 
+						`hsl(${gammaHue[cou4]}, ${ + gammaSat[cou4] +10 }%, ${  gammaLight [3] +10 }%)`);
+						$( tabsContent [i]).children(arrStyleColor[4]).css("background",
+						 `hsl(${gammaHue[cou5]}, ${ + gammaSat[cou5]     }%, ${  gammaLight [4] -7 }%)`);
+						$( tabsContent [i]).children(arrStyleColor[5]).css("background", 
+						`hsl(${gammaHue[cou6]}, ${ + gammaSat[cou6]     }%, ${  gammaLight [5] }%)`);
+						$( tabsContent [i]).children(arrStyleColor[6]).css("background", 
+						`hsl(${gammaHue[cou7]}, ${ + gammaSat[cou7]     }%, ${  gammaLight [6]  }%)`);
+						$( tabsContent [i]).children(arrStyleColor[7]).css("background", 
+						`hsl(${gammaHue[cou8]}, ${ + gammaSat[cou8] +30 }%, ${  gammaLight [7]   }%)`);
+						}
+						else if( gammaHue[cou1] >= 49  && gammaHue[cou1] <= 93) 
+					   {$( tabsContent [i] ).children(arrStyleColor[0]).css("background", 
+					   `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou1]     }%, ${  gammaLight [0] }%)`);
+						$( tabsContent [i] ).children(arrStyleColor[1]).css("background",
+						 `hsl(${gammaHue[cou2]}, ${ + gammaSat[cou2]     }%, ${  gammaLight [1] }%)`);
+						$( tabsContent [i] ).children(arrStyleColor[2]).css("background", 
+						`hsl(${gammaHue[cou3]}, ${ + gammaSat[cou3]     }%, ${  gammaLight [2] }%)`);
+						$( tabsContent [i] ).children(arrStyleColor[3]).css("background", 
+						`hsl(${gammaHue[cou4]}, ${ + gammaSat[cou4] +35 }%, ${ gammaLight [3] }%)`);
+						$( tabsContent [i] ).children(arrStyleColor[4]).css("background",
+						 `hsl(${gammaHue[cou5]}, ${ + gammaSat[cou5] +5  }%, ${  gammaLight [4]}%)`);
+						$( tabsContent [i] ).children(arrStyleColor[5]).css("background",
+						 `hsl(${gammaHue[cou6]}, ${ + gammaSat[cou6] +30 }%, ${  gammaLight [5] }%)`);
+						$( tabsContent [i] ).children(arrStyleColor[6]).css("background",
+						 `hsl(${gammaHue[cou7]}, ${ + gammaSat[cou7] +5  }%, ${  gammaLight [6] }%)`);
+						$( tabsContent [i] ).children(arrStyleColor[7]).css("background", 
+						`hsl(${gammaHue[cou8]}, ${ + gammaSat[cou8] +10 }%, ${  gammaLight [7]  }%)`);
+						}
+						else if(gammaHue[cou1] >= 94 && gammaHue[cou1] <= 158) 
+					   {$( tabsContent [i] ).children(arrStyleColor[0]).css("background",
+					    `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou1]     }%, ${  gammaLight [0] -1}%)`);
+						$( tabsContent [i] ).children(arrStyleColor[1]).css("background", 
+						`hsl(${gammaHue[cou2]}, ${ + gammaSat[cou2]     }%, ${  gammaLight [1] -2}%)`);
+						$( tabsContent [i] ).children(arrStyleColor[2]).css("background", 
+						`hsl(${gammaHue[cou3]}, ${ + gammaSat[cou3]     }%, ${  gammaLight [2] -5}%)`);
+						$( tabsContent [i] ).children(arrStyleColor[3]).css("background", 
+						`hsl(${gammaHue[cou4]}, ${ + gammaSat[cou4] +20 }%, ${  gammaLight [3] }%)`);
+						$( tabsContent [i] ).children(arrStyleColor[4]).css("background", 
+						`hsl(${gammaHue[cou5]}, ${ + gammaSat[cou5]     }%, ${  gammaLight [4] -7}%)`);
+						$( tabsContent [i] ).children(arrStyleColor[5]).css("background", 
+						`hsl(${gammaHue[cou6]}, ${ + gammaSat[cou6]     }%, ${  gammaLight [5] }%)`);
+						$( tabsContent [i] ).children(arrStyleColor[6]).css("background", 
+						`hsl(${gammaHue[cou7]}, ${ + gammaSat[cou7]     }%, ${  gammaLight [6] }%)`);
+						$( tabsContent [i] ).children(arrStyleColor[7]).css("background", 
+						`hsl(${gammaHue[cou8]}, ${ + gammaSat[cou8]     }%, ${  gammaLight [7]  }%)`);
+					   } 
+						else if( gammaHue[cou1] >= 159 && gammaHue[cou1] <= 199) 
+					   {$( tabsContent [i] ).children(arrStyleColor[0]).css("background",
+					   `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou1]     }%, ${ gammaLight [0] -7 }%)`);
+						$( tabsContent [i] ).children(arrStyleColor[1]).css("background",
+						 `hsl(${gammaHue[cou2]}, ${ + gammaSat[cou2]     }%, ${  gammaLight [1] -8 }%)`);
+						$( tabsContent [i] ).children(arrStyleColor[2]).css("background", 
+						`hsl(${gammaHue[cou3]}, ${ + gammaSat[cou3]     }%, ${  gammaLight [2] -10}%)`);
+						$( tabsContent [i] ).children(arrStyleColor[3]).css("background", 
+						`hsl(${gammaHue[cou4]}, ${ + gammaSat[cou4] +10 }%, ${  gammaLight [3] }%)`);
+						$( tabsContent [i] ).children(arrStyleColor[4]).css("background", 
+						`hsl(${gammaHue[cou5]}, ${ + gammaSat[cou5] +10 }%, ${  gammaLight [4] -5}%)`);
+						$( tabsContent [i] ).children(arrStyleColor[5]).css("background", 
+						`hsl(${gammaHue[cou6]}, ${ + gammaSat[cou6] +10 }%, ${  gammaLight [5] }%)`);
+						$( tabsContent [i] ).children(arrStyleColor[6]).css("background",
+						 `hsl(${gammaHue[cou7]}, ${ + gammaSat[cou7] +20 }%, ${  gammaLight [6] }%)`);
+						$( tabsContent [i] ).children(arrStyleColor[7]).css("background", 
+						`hsl(${gammaHue[cou8]}, ${ + gammaSat[cou8] +20 }%, ${  gammaLight [7]  }%)`);
+					   }
+						else if( gammaHue[cou1] >= 200 && gammaHue[cou1] <= 241) 
+					   {$( tabsContent [i] ).children(arrStyleColor[0]).css("background", 
+					   `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou1] +30 }%, ${  gammaLight [0] -4 }%)`);
+						$( tabsContent [i] ).children(arrStyleColor[1]).css("background", 
+						`hsl(${gammaHue[cou2]}, ${ + gammaSat[cou2] +50 }%, ${  gammaLight [1]-3  }%)`);
+						$( tabsContent [i] ).children(arrStyleColor[2]).css("background",
+						 `hsl(${gammaHue[cou3]}, ${ + gammaSat[cou3] +70 }%, ${  gammaLight [2]-3  }%)`);
+						$( tabsContent [i] ).children(arrStyleColor[3]).css("background",
+						 `hsl(${gammaHue[cou4]}, ${ + gammaSat[cou4] +20 }%, ${  gammaLight [3] +8 }%)`);
+						$( tabsContent [i] ).children(arrStyleColor[4]).css("background",
+						 `hsl(${gammaHue[cou5]}, ${ + gammaSat[cou5]     }%, ${  gammaLight [4] +1}%)`);
+						$( tabsContent [i] ).children(arrStyleColor[5]).css("background",
+						 `hsl(${gammaHue[cou6]}, ${ + gammaSat[cou6] +5  }%, ${  gammaLight [5] +5 }%)`);
+						$( tabsContent [i] ).children(arrStyleColor[6]).css("background", 
+						`hsl(${gammaHue[cou7]}, ${ + gammaSat[cou7] +10 }%, ${  gammaLight [6] +5 }%)`);
+						$( tabsContent [i] ).children(arrStyleColor[7]).css("background", 
+						`hsl(${gammaHue[cou8]}, ${ + gammaSat[cou8] +20 }%, ${  gammaLight [7] +5  }%)`);
+					   }
+						else if( gammaHue[cou1] >= 242 && gammaHue[cou1] <= 280) 
+					   {$( tabsContent [i] ).children(arrStyleColor[0]).css("background", 
+					   `hsl(${gammaHue[cou1]}, ${+ gammaSat[cou1] +20  }%, ${  gammaLight [0] -1}%)`);
+						$( tabsContent [i] ).children(arrStyleColor[1]).css("background", 
+						`hsl(${gammaHue[cou2]}, ${+ gammaSat[cou2] +20  }%, ${  gammaLight [1] }%)`);
+						$( tabsContent [i] ).children(arrStyleColor[2]).css("background", 
+						`hsl(${gammaHue[cou3]}, ${+ gammaSat[cou3] +30  }%, ${  gammaLight [2] +4}%)`);
+						$( tabsContent [i] ).children(arrStyleColor[3]).css("background", 
+						`hsl(${gammaHue[cou4]}, ${+ gammaSat[cou4] +30  }%, ${  gammaLight [3] +25}%)`);
+						$( tabsContent [i] ).children(arrStyleColor[4]).css("background", 
+						`hsl(${gammaHue[cou5]}, ${+ gammaSat[cou5] +30  }%, ${  gammaLight [4] +20 }%)`);
+						$( tabsContent [i] ).children(arrStyleColor[5]).css("background",
+						 `hsl(${gammaHue[cou6]}, ${+ gammaSat[cou6] +30  }%, ${  gammaLight [5] +18}%)`);
+						$( tabsContent [i] ).children(arrStyleColor[6]).css("background", 
+						`hsl(${gammaHue[cou7]}, ${+ gammaSat[cou7] +30  }%, ${  gammaLight [6] +15}%)`);
+						$( tabsContent [i] ).children(arrStyleColor[7]).css("background", 
+						`hsl(${gammaHue[cou8]}, ${+ gammaSat[cou8] +30  }%, ${  gammaLight [7] +12 }%)`);
+					   }
+						else if( gammaHue[cou1] >= 281 && gammaHue[cou1] <= 352) 
+					   {$( tabsContent [i] ).children(arrStyleColor[0]).css("background",
+					    `hsl(${gammaHue[cou1]}, ${ + gammaSat[cou1]     }%, ${  gammaLight [0] -1 }%)`);
+						$( tabsContent [i] ).children(arrStyleColor[1]).css("background",
+						 `hsl(${gammaHue[cou2]}, ${ + gammaSat[cou2]     }%, ${  gammaLight [1]  }%)`);
+						$( tabsContent [i] ).children(arrStyleColor[2]).css("background",
+						 `hsl(${gammaHue[cou3]}, ${ + gammaSat[cou3] +10 }%, ${  gammaLight [2]  }%)`);
+						$( tabsContent [i] ).children(arrStyleColor[3]).css("background",
+						 `hsl(${gammaHue[cou4]}, ${ + gammaSat[cou4] +10 }%, ${  gammaLight [3] +5 }%)`);
+						$( tabsContent [i] ).children(arrStyleColor[4]).css("background", 
+						`hsl(${gammaHue[cou5]}, ${ + gammaSat[cou5]     }%, ${  gammaLight [4]  }%)`);
+						$( tabsContent [i] ).children(arrStyleColor[5]).css("background", 
+						`hsl(${gammaHue[cou6]}, ${ + gammaSat[cou6]     }%, ${  gammaLight [5] +6}%)`);
+						$( tabsContent [i] ).children(arrStyleColor[6]).css("background", 
+						`hsl(${gammaHue[cou7]}, ${ + gammaSat[cou7]     }%, ${  gammaLight [6] +6 }%)`);
+						$( tabsContent [i] ).children(arrStyleColor[7]).css("background", 
+						`hsl(${gammaHue[cou8]}, ${ + gammaSat[cou8] -5  }%, ${  gammaLight [7] +5  }%)`);
+					   }
+						else if(gammaHue[cou1] >= 353  && gammaHue[cou1] <= 360)  
+						{$( tabsContent [i]).children(arrStyleColor[0]).css("background",
+						 `hsl(${gammaHue[cou1]}, ${gammaSat[cou1]     }%, ${  gammaLight [0]  }%)`);
+						 $( tabsContent [i]).children(arrStyleColor[1]).css("background",
+						  `hsl(${gammaHue[cou2]}, ${gammaSat[cou2]     }%, ${  gammaLight [1]  }%)`);
+						 $( tabsContent [i]).children(arrStyleColor[2]).css("background",
+						  `hsl(${gammaHue[cou3]}, ${gammaSat[cou3]     }%, ${  gammaLight [2]  }%)`);
+						 $( tabsContent [i]).children(arrStyleColor[3]).css("background",
+						  `hsl(${gammaHue[cou4]}, ${gammaSat[cou4]     }%, ${  gammaLight [3] +18 }%)`);
+						 $( tabsContent [i]).children(arrStyleColor[4]).css("background",
+						  `hsl(${gammaHue[cou5]}, ${gammaSat[cou5]     }%, ${  gammaLight [4] +5 }%)`);
+						 $( tabsContent [i]).children(arrStyleColor[5]).css("background",
+						  `hsl(${gammaHue[cou6]}, ${gammaSat[cou6]     }%, ${  gammaLight [5]  }%)`);
+						 $( tabsContent [i]).children(arrStyleColor[6]).css("background",
+						  `hsl(${gammaHue[cou7]}, ${gammaSat[cou7]     }%, ${  gammaLight [6]  }%)`);
+						 $( tabsContent [i]).children(arrStyleColor[7]).css("background",
+						 `hsl(${gammaHue[cou8]}, ${gammaSat[cou8]     }%, ${  gammaLight [7]   }%)`);
+						}
 	
 						   if(gammaLight[i] == 100){$(tabsContent).children(item).css("background", 
 						   `hsl(${gammaLight[i]}, ${50}%, ${ gammaLight [i]-11}%)`);}
