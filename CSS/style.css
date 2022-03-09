@@ -48,7 +48,7 @@ img.active {
 }
 
 input {
-    display: none;
+    display: block;
 }
 
 button {
@@ -101,7 +101,7 @@ button {
     display: flex;
     align-items:center;
 }
-.buttOrderCosult{
+.buttOrderConsult{
     cursor: pointer;
     font-family: 'Roboto';
     font-weight: 400;
